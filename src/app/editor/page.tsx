@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { toPng } from 'html-to-image';
 import { Header } from '@/components/layout/Header';
 import { EditorSidebar } from '@/components/editor/EditorSidebar';
@@ -49,6 +50,10 @@ export default function EditorPage() {
     const [tone, setTone] = useState('Professional & Trustworthy');
     const [language, setLanguage] = useState('English');
 
+    // URL params (checkout success kontrolü)
+    const searchParams = useSearchParams();
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
     // Credit state
     const [credits, setCredits] = useState<number | null>(null); // null = loading
     const [isPro, setIsPro] = useState(false);
@@ -62,9 +67,11 @@ export default function EditorPage() {
             const result = await checkCredits();
             setCredits(result.credits);
             setIsPro(result.isPro);
+            return result;
         } catch (e) {
             console.error('Failed to load credits:', e);
             setCredits(0);
+            return null;
         } finally {
             setCreditsLoading(false);
         }
@@ -72,7 +79,24 @@ export default function EditorPage() {
 
     useEffect(() => {
         refreshCredits();
-    }, []);
+        
+        // Checkout'tan başarılı dönüş kontrolü
+        if (searchParams.get('success') === 'true') {
+            setShowSuccessMessage(true);
+            // URL'den success parametresini temizle
+            window.history.replaceState({}, '', '/editor');
+            
+            // Kredileri birkaç kez yenile (webhook gecikebilir)
+            const retryRefresh = async () => {
+                for (let i = 0; i < 5; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 2000)); // 2sn bekle
+                    const result = await refreshCredits();
+                    if (result?.isPro) break; // Pro olduysa dur
+                }
+            };
+            retryRefresh();
+        }
+    }, [searchParams]);
 
     const handleUpload = (files: File[]) => {
         const newScreenshots: Screenshot[] = files.map(file => ({
@@ -234,6 +258,15 @@ export default function EditorPage() {
     return (
         <div className={styles.page}>
             <Header />
+            
+            {/* Success Toast */}
+            {showSuccessMessage && (
+                <div className={styles.successToast}>
+                    <span>🎉 Payment successful! Your Pro access is being activated...</span>
+                    <button onClick={() => setShowSuccessMessage(false)}>×</button>
+                </div>
+            )}
+
             <main className={styles.main}>
                 <EditorSidebar
                     onGenerateAI={handleGenerateAI}
