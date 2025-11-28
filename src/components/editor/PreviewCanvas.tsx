@@ -98,14 +98,16 @@ export const PreviewCanvas: React.FC<PreviewCanvasProps> = ({
                                 
                                 <div className={styles.phoneWrapper}>
                                     <div className={styles.phoneFrame}>
-                                        <div className={styles.notch}></div>
-                                        <div className={styles.screenContent}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img
-                                                src={URL.createObjectURL(shot.file)}
-                                                alt="Screenshot"
-                                                className={styles.screenshot}
-                                            />
+                                        <div className={styles.screenInner}>
+                                            <div className={styles.dynamicIsland}></div>
+                                            <div className={styles.screenContent}>
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img
+                                                    src={URL.createObjectURL(shot.file)}
+                                                    alt="Screenshot"
+                                                    className={styles.screenshot}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
