@@ -1,0 +1,145 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 100%;
+    padding: 0 1.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.logoIcon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.logoText {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.4rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.statusDot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* --- PRO BADGE --- */
+.proBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #FFD700; /* Gold */
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.proBadge:hover {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.link {
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.upgradeBtn {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.upgradeBtn:hover {
+    opacity: 0.9;
+}

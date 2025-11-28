@@ -1,0 +1,293 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.15s;
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.header {
+  padding: 2rem 2rem 1rem;
+  text-align: center;
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: #000;
+}
+
+.header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ededed;
+}
+
+.content {
+  padding: 0 2rem 2rem;
+}
+
+/* Loading & Error States */
+.loadingState,
+.errorState {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorState {
+  color: #ef4444;
+}
+
+/* Status Card */
+.statusCard {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.freeCard {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.freeBadge {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+}
+
+.statusDesc {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.statusDesc strong {
+  color: #ededed;
+}
+
+/* Info Row */
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.infoLabel {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.infoValue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #ededed;
+}
+
+.activeDot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.manageBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #1a1a1a;
+  color: #ededed;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.manageBtn:hover {
+  background: #222;
+  border-color: #444;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.15s;
+}
+
+.cancelBtn:hover {
+  color: #ef4444;
+}
+
+/* Confirm Box */
+.confirmBox {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.confirmText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.confirmActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.confirmCancelBtn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.confirmCancelBtn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.confirmCancelBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.confirmKeepBtn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  color: #888;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.confirmKeepBtn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* Upgrade Prompt (for free users) */
+.upgradePrompt {
+  text-align: center;
+}
+
+.upgradePrompt h3 {
+  font-size: 1rem;
+  color: #ededed;
+  margin-bottom: 1rem;
+}
+
+.benefitsList {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.benefitsList li {
+  color: #888;
+  font-size: 0.85rem;
+  padding: 0.35rem 0;
+}
+

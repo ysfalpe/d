@@ -1,0 +1,80 @@
+.uploader {
+    border: 1px dashed #333;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploader:hover {
+    border-color: #555;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.active {
+    border-color: #fff;
+    border-style: solid;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconWrapper {
+    width: 48px;
+    height: 48px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.uploader:hover .iconWrapper {
+    color: #fff;
+    border-color: #333;
+}
+
+.active .iconWrapper {
+    color: #fff;
+    background: #222;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #eee;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.formats {
+    font-size: 0.7rem;
+    color: #444;
+    padding: 0.3rem 0.6rem;
+    background: #111;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+}
