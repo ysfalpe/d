@@ -12,20 +12,18 @@ export const Footer = () => {
                     <div className={styles.links}>
                         <div className={styles.column}>
                             <h4>Product</h4>
-                            <a href="#">Features</a>
-                            <a href="#">Templates</a>
-                            <a href="#">Pricing</a>
+                            <a href="/#features">Features</a>
+                            <a href="/editor">Editor</a>
                         </div>
                         <div className={styles.column}>
                             <h4>Resources</h4>
-                            <a href="#">Blog</a>
-                            <a href="#">Documentation</a>
-                            <a href="#">Help Center</a>
+                            <a href="mailto:support@appshot.ai">Contact</a>
+                            <a href="https://github.com/ysfalpe/d" target="_blank" rel="noopener noreferrer">GitHub</a>
                         </div>
                         <div className={styles.column}>
                             <h4>Legal</h4>
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms of Service</a>
+                            <a href="/privacy">Privacy</a>
+                            <a href="/terms">Terms</a>
                         </div>
                     </div>
                 </div>
