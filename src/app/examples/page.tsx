@@ -117,14 +117,11 @@ export default function ExamplesPage() {
                 </div>
                 
                 <div className={styles.phoneFrame}>
-                  <div className={styles.screenInner}>
-                    <div className={styles.dynamicIsland}></div>
-                    <div className={styles.screenContent}>
-                      <div className={styles.placeholderScreen}>
-                        <div className={styles.placeholderIcon}></div>
-                        <div className={styles.placeholderText}></div>
-                        <div className={styles.placeholderText} style={{ width: '60%' }}></div>
-                      </div>
+                  <div className={styles.screenContent}>
+                    <div className={styles.placeholderScreen}>
+                      <div className={styles.placeholderIcon}></div>
+                      <div className={styles.placeholderText}></div>
+                      <div className={styles.placeholderText} style={{ width: '60%' }}></div>
                     </div>
                   </div>
                 </div>
