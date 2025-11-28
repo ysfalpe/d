@@ -2,9 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// ⚠️ LOCAL: sqlite kullan
+// ✅ PRODUCTION: postgresql olarak değiştir
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "sqlite"      // Production'da "postgresql" yap
+  url       = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL") // PostgreSQL için uncomment et
 }
 
 model User {
