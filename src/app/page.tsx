@@ -39,9 +39,11 @@ export default function Home() {
                     Start Now
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
-                  View Examples
-                </Button>
+                <Link href="/examples">
+                  <Button variant="outline" size="lg">
+                    View Examples
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -53,11 +55,28 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <div className={styles.heroImageContainer}>
-              {/* Placeholder for Hero Image - In a real app, use a real screenshot */}
               <div className={styles.mockupGrid}>
-                <div className={styles.mockupItem} style={{ transform: 'translateY(20px)' }}></div>
-                <div className={styles.mockupItem} style={{ zIndex: 2 }}></div>
-                <div className={styles.mockupItem} style={{ transform: 'translateY(20px)' }}></div>
+                {/* Left Phone */}
+                <div className={styles.mockupItem} style={{ transform: 'translateY(20px)', background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}>
+                  <div className={styles.mockupContent}>
+                    <span className={styles.mockupHeadline}>Track Your <span style={{color: '#fff'}}>Progress</span></span>
+                    <div className={styles.mockupPhone}></div>
+                  </div>
+                </div>
+                {/* Center Phone */}
+                <div className={styles.mockupItem} style={{ zIndex: 2, background: 'linear-gradient(135deg, #818cf8 0%, #6366f1 100%)' }}>
+                  <div className={styles.mockupContent}>
+                    <span className={styles.mockupHeadline}>Find Your <span style={{color: '#fff'}}>Peace</span></span>
+                    <div className={styles.mockupPhone}></div>
+                  </div>
+                </div>
+                {/* Right Phone */}
+                <div className={styles.mockupItem} style={{ transform: 'translateY(20px)', background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' }}>
+                  <div className={styles.mockupContent}>
+                    <span className={styles.mockupHeadline}><span style={{color: '#fff'}}>Smart</span> Money</span>
+                    <div className={styles.mockupPhone}></div>
+                  </div>
+                </div>
               </div>
               <div className={styles.glowEffect}></div>
             </div>

@@ -67,9 +67,12 @@ export const Header = () => {
                     </div>
 
                     <nav className={styles.nav}>
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            GitHub
-                        </a>
+                        <Link href="/examples" className={styles.link}>
+                            Examples
+                        </Link>
+                        <Link href="/pricing" className={styles.link}>
+                            Pricing
+                        </Link>
 
                         <SignedOut>
                             <SignInButton mode="modal">

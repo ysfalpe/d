@@ -13,7 +13,8 @@ export const Footer = () => {
                         <div className={styles.column}>
                             <h4>Product</h4>
                             <a href="/#features">Features</a>
-                            <a href="/editor">Editor</a>
+                            <a href="/examples">Examples</a>
+                            <a href="/pricing">Pricing</a>
                         </div>
                         <div className={styles.column}>
                             <h4>Resources</h4>
