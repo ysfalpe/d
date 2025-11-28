@@ -149,7 +149,7 @@ export default function EditorPage() {
         if (screenshots.length === 0) return;
 
         // Kredi kontrolü (Pro değilse ve yeterli kredi yoksa)
-        if (!isPro && credits < screenshots.length) {
+        if (!isPro && (credits === null || credits < screenshots.length)) {
             setShowUpgradeModal(true);
             return;
         }
