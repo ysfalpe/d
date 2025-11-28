@@ -85,6 +85,11 @@ export default function ExamplesPage() {
         </section>
 
         <section className={styles.examplesSection}>
+          <div className={styles.inspirationNote}>
+            <span className={styles.sparkle}>✨</span>
+            <p>These could be <strong>your</strong> app screenshots. Start creating now!</p>
+          </div>
+          
           <div className={styles.examplesGrid}>
             {examples.map((example, index) => (
               <motion.div
