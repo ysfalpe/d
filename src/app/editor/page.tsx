@@ -50,22 +50,28 @@ export default function EditorPage() {
     const [language, setLanguage] = useState('English');
 
     // Credit state
-    const [credits, setCredits] = useState<number>(3);
+    const [credits, setCredits] = useState<number | null>(null); // null = loading
     const [isPro, setIsPro] = useState(false);
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+    const [creditsLoading, setCreditsLoading] = useState(true);
 
     // İlk yüklemede credit durumunu kontrol et
+    const refreshCredits = async () => {
+        try {
+            setCreditsLoading(true);
+            const result = await checkCredits();
+            setCredits(result.credits);
+            setIsPro(result.isPro);
+        } catch (e) {
+            console.error('Failed to load credits:', e);
+            setCredits(0);
+        } finally {
+            setCreditsLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const loadCredits = async () => {
-            try {
-                const result = await checkCredits();
-                setCredits(result.credits);
-                setIsPro(result.isPro);
-            } catch (e) {
-                console.error('Failed to load credits:', e);
-            }
-        };
-        loadCredits();
+        refreshCredits();
     }, []);
 
     const handleUpload = (files: File[]) => {
@@ -181,7 +187,8 @@ export default function EditorPage() {
         const results = await Promise.all(promises);
 
         setScreenshots(results);
-        setCredits(lastCredits);
+        // Kredileri sunucudan yeniden al (doğru değeri görmek için)
+        await refreshCredits();
         setIsGlobalGenerating(false);
     };
 
@@ -241,8 +248,9 @@ export default function EditorPage() {
                     setLanguage={setLanguage}
                     onExportAll={handleExportAll}
                     isExporting={isExporting}
-                    credits={credits}
+                    credits={credits ?? 0}
                     isPro={isPro}
+                    isLoadingCredits={creditsLoading}
                     onUpgradeClick={() => setShowUpgradeModal(true)}
                 />
                 <PreviewCanvas

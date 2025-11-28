@@ -18,6 +18,7 @@ interface EditorSidebarProps {
     isExporting: boolean;
     credits: number;
     isPro: boolean;
+    isLoadingCredits: boolean;
     onUpgradeClick: () => void;
 }
 
@@ -36,6 +37,7 @@ export const EditorSidebar: React.FC<EditorSidebarProps> = ({
     isExporting,
     credits,
     isPro,
+    isLoadingCredits,
     onUpgradeClick
 }) => {
     return (
@@ -117,7 +119,11 @@ export const EditorSidebar: React.FC<EditorSidebarProps> = ({
 
             {/* Credits Display */}
             <div className={styles.creditsSection}>
-                {isPro ? (
+                {isLoadingCredits ? (
+                    <div className={styles.creditsLoading}>
+                        <span>Loading...</span>
+                    </div>
+                ) : isPro ? (
                     <div className={styles.proBadge}>
                         <Crown size={14} />
                         <span>Pro - Unlimited</span>
@@ -132,7 +138,7 @@ export const EditorSidebar: React.FC<EditorSidebarProps> = ({
                             className={styles.upgradeLink}
                             onClick={onUpgradeClick}
                         >
-                            Get more
+                            Upgrade to Pro
                         </button>
                     </div>
                 )}

@@ -28,10 +28,10 @@ export async function getUserSubscription() {
             id: userId,
             email,
             isPro: false,
-            credits: 3
+            credits: 0
         }
     });
-    return { isPro: false, credits: 3 };
+    return { isPro: false, credits: 0 };
   }
 
   return user;

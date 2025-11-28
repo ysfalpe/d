@@ -15,7 +15,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   isPro     Boolean  @default(false)
-  credits   Int      @default(3)
+  credits   Int      @default(0)
 
   polarSubscriptionId String?
   polarCustomerId     String?
