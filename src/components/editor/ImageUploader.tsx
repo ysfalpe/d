@@ -18,7 +18,14 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
         accept: {
             'image/*': ['.png', '.jpg', '.jpeg', '.webp']
         },
-        multiple: true
+        multiple: true,
+        maxSize: 5 * 1024 * 1024, // 5MB
+        onDropRejected: (rejectedFiles) => {
+            const oversized = rejectedFiles.filter(f => f.errors.some(e => e.code === 'file-too-large'));
+            if (oversized.length > 0) {
+                alert('Some files are too large. Maximum file size is 5MB.');
+            }
+        }
     });
 
     return (

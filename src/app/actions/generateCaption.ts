@@ -1,6 +1,8 @@
 'use server';
 
+import { auth } from '@clerk/nextjs/server';
 import { useCredit } from './user';
+import { rateLimit } from '@/lib/rateLimit';
 
 const OPENROUTER_API_KEY = process.env.OPENAI_API_KEY;
 const OPENROUTER_BASE_URL = process.env.OPENAI_BASE_URL || 'https://openrouter.ai/api/v1';
@@ -21,6 +23,24 @@ export interface AIResponse {
 }
 
 export async function generateCaptionAction(imageBase64: string, options: GenerateOptions = {}): Promise<AIResponse> {
+  // Auth kontrolü
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error('Not authenticated');
+  }
+
+  // Rate limiting (kullanıcı başına dakikada 10 istek)
+  const rateLimitResult = rateLimit(userId, 10, 60000);
+  if (!rateLimitResult.success) {
+    throw new Error(`Too many requests. Please wait ${rateLimitResult.resetIn} seconds.`);
+  }
+
+  // Image size kontrolü (max 5MB base64 = ~6.6MB string)
+  const MAX_IMAGE_SIZE = 7 * 1024 * 1024; // 7MB base64 string
+  if (imageBase64.length > MAX_IMAGE_SIZE) {
+    throw new Error('Image too large. Please use an image smaller than 5MB.');
+  }
+
   // Kredi kontrolü
   const creditResult = await useCredit();
   
