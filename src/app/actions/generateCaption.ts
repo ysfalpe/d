@@ -73,7 +73,7 @@ STRICT OUTPUT RULES:
       headers: {
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://appshot-ai.com',
+        'HTTP-Referer': 'https://d-sigma-five.vercel.app',
         'X-Title': 'AppShot AI',
       },
       body: JSON.stringify({

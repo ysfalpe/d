@@ -31,7 +31,7 @@ export async function createCheckoutAction() {
       },
       body: JSON.stringify({
         product_id: '60c91b2c-daad-42be-83ec-8951215db507',
-        success_url: 'http://localhost:3000/editor?success=true',
+        success_url: 'https://d-sigma-five.vercel.app/editor?success=true',
         metadata: {
           userId: userId,
         },
