@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './PreviewCanvas.module.css';
 import { ImageUploader } from './ImageUploader';
 import { Screenshot } from '@/app/editor/types';
-import { RefreshCw, Upload, FileText, Sparkles, Download } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import * as Icons from 'lucide-react';
 
 interface PreviewCanvasProps {
@@ -60,49 +60,6 @@ export const PreviewCanvas: React.FC<PreviewCanvasProps> = ({
         <div className={styles.canvasContainer}>
             {screenshots.length === 0 ? (
                 <div className={styles.emptyState}>
-                    {/* How it works guide */}
-                    <div className={styles.howItWorks}>
-                        <h3 className={styles.howItWorksTitle}>How it works</h3>
-                        <div className={styles.steps}>
-                            <div className={styles.step}>
-                                <div className={styles.stepNumber}>1</div>
-                                <div className={styles.stepIcon}><Upload size={20} /></div>
-                                <div className={styles.stepText}>
-                                    <strong>Upload Screenshots</strong>
-                                    <span>Drag & drop your app screenshots</span>
-                                </div>
-                            </div>
-                            <div className={styles.stepConnector}></div>
-                            <div className={styles.step}>
-                                <div className={styles.stepNumber}>2</div>
-                                <div className={styles.stepIcon}><FileText size={20} /></div>
-                                <div className={styles.stepText}>
-                                    <strong>Add App Details</strong>
-                                    <span>Fill in name, description & style</span>
-                                </div>
-                            </div>
-                            <div className={styles.stepConnector}></div>
-                            <div className={styles.step}>
-                                <div className={styles.stepNumber}>3</div>
-                                <div className={styles.stepIcon}><Sparkles size={20} /></div>
-                                <div className={styles.stepText}>
-                                    <strong>Generate with AI</strong>
-                                    <span>Click Generate to create captions</span>
-                                </div>
-                            </div>
-                            <div className={styles.stepConnector}></div>
-                            <div className={styles.step}>
-                                <div className={styles.stepNumber}>4</div>
-                                <div className={styles.stepIcon}><Download size={20} /></div>
-                                <div className={styles.stepText}>
-                                    <strong>Export & Use</strong>
-                                    <span>Download ready for App Store</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Upload area */}
                     <ImageUploader onUpload={onUpload} />
                 </div>
             ) : (
