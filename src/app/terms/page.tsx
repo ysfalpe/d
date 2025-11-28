@@ -12,7 +12,7 @@ export default function TermsPage() {
           <h1>Terms of Service</h1>
           <p className={styles.lastUpdated}>Last updated: November 2024</p>
 
-          <section>
+          <section className={styles.section}>
             <h2>1. Acceptance of Terms</h2>
             <p>
               By accessing and using AppShot AI, you agree to be bound by these Terms of Service 
@@ -21,7 +21,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>2. Description of Service</h2>
             <p>
               AppShot AI is a SaaS platform that helps app developers create professional 
@@ -29,7 +29,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>3. User Accounts</h2>
             <p>
               To use certain features of our service, you must create an account. You are 
@@ -38,7 +38,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>4. Subscription and Payments</h2>
             <ul>
               <li>Pro subscriptions are billed monthly at $19/month</li>
@@ -49,7 +49,7 @@ export default function TermsPage() {
             </ul>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>5. Acceptable Use</h2>
             <p>You agree not to:</p>
             <ul>
@@ -61,7 +61,7 @@ export default function TermsPage() {
             </ul>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>6. Intellectual Property</h2>
             <p>
               You retain all rights to the screenshots you upload. The captions and designs 
@@ -70,7 +70,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>7. Limitation of Liability</h2>
             <p>
               AppShot AI is provided "as is" without warranties of any kind. We shall not be 
@@ -79,7 +79,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>8. Changes to Terms</h2>
             <p>
               We reserve the right to modify these terms at any time. We will notify users 
@@ -87,7 +87,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section>
+          <section className={styles.section}>
             <h2>9. Contact</h2>
             <p>
               For questions about these Terms of Service, please contact:

@@ -16,7 +16,7 @@
   padding: 4rem 1.5rem;
 }
 
-h1 {
+.container h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
@@ -26,43 +26,43 @@ h1 {
   margin-bottom: 3rem;
 }
 
-section {
+.section {
   margin-bottom: 2.5rem;
 }
 
-h2 {
+.section h2 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
   color: #fff;
 }
 
-p {
+.section p {
   color: #888;
   line-height: 1.7;
   margin-bottom: 1rem;
 }
 
-ul {
+.section ul {
   color: #888;
   line-height: 1.8;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
 }
 
-li {
+.section li {
   margin-bottom: 0.5rem;
 }
 
-a {
+.section a {
   color: #818cf8;
   text-decoration: none;
 }
 
-a:hover {
+.section a:hover {
   text-decoration: underline;
 }
 
-strong {
+.section strong {
   color: #ccc;
 }
 
