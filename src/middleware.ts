@@ -1,12 +1,20 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Define protected routes
+// Define protected routes (require authentication)
 const isProtectedRoute = createRouteMatcher([
   '/editor(.*)', // Protect editor and sub-pages
-  '/api/webhooks(.*)', // Webhooks might need specific handling but generally protected or signature verified
+]);
+
+// Public routes that should NOT require auth (webhooks use their own signature verification)
+const isPublicRoute = createRouteMatcher([
+  '/api/webhooks(.*)', // Webhooks verify via signature, not Clerk
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
+  // Skip auth for public routes (webhooks)
+  if (isPublicRoute(req)) return;
+  
+  // Require auth for protected routes
   if (isProtectedRoute(req)) await auth.protect();
 });
 
