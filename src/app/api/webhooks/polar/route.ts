@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     if (type === 'subscription.created' || type === 'subscription.active' || type === 'subscription.updated') {
       const userId = getUserIdFromMetadata(data);
       if (userId) {
-        await upgradeUser(userId, data.id, data.customerId || data.customer_id);
+        await upgradeUser(userId, data.id, data.customerId);
       } else {
         console.warn('subscription event: No userId in metadata');
       }
@@ -102,8 +102,9 @@ export async function POST(req: NextRequest) {
     // === ORDER EVENTS (One-time payments) ===
     if (type === 'order.created' || type === 'order.paid') {
       const userId = getUserIdFromMetadata(data);
+      const orderData = data as any;
       if (userId) {
-        await upgradeUser(userId, data.id, data.customerId || data.customer_id);
+        await upgradeUser(userId, orderData.id, orderData.customerId || orderData.customer_id);
       } else {
         console.warn('order event: No userId in metadata');
       }
