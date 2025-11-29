@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AppShot AI - Create Stunning App Store Screenshots",
-    description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
+  description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
   },
   robots: {
     index: true,

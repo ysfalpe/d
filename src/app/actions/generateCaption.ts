@@ -41,12 +41,12 @@ export async function generateCaptionAction(imageBase64: string, options: Genera
     throw new Error('Image too large. Please use an image smaller than 5MB.');
   }
 
-  // Kredi kontrolü
-  const creditResult = await useCredit();
-  
-  if (!creditResult.success) {
-    throw new Error(creditResult.error || 'No credits remaining. Please upgrade to Pro.');
-  }
+  // Kredi kontrolü - TEMPORARY BYPASS
+  // const creditResult = await useCredit();
+
+  // if (!creditResult.success) {
+  //   throw new Error(creditResult.error || 'No credits remaining. Please upgrade to Pro.');
+  // }
 
   if (!OPENROUTER_API_KEY) {
     throw new Error('API Key is missing');
@@ -55,8 +55,15 @@ export async function generateCaptionAction(imageBase64: string, options: Genera
   const { appName, description, tone, language = 'English' } = options;
 
   // --- SUPER PROMPT WITH JSON OUTPUT ---
-  let systemPrompt = `You are an expert App Store designer and copywriter.
-Your task is to analyze an app screenshot and generate a structured JSON response for a marketing card.
+  let systemPrompt = `You are an elite App Store optimization expert and creative director.
+Your goal is to generate the perfect marketing caption for an app screenshot.
+
+PROCESS (Follow these steps internally):
+1. **Context Absorption**: Deeply analyze the provided App Name and Description. Understand the app's core value and target audience. Ask yourself: "What problem does this app solve?"
+2. **Visual Analysis**: Examine the screenshot. What specific feature or screen is shown? Does it match the description? (e.g., Is it a dashboard? A settings screen? A chat interface?)
+3. **Ideation**: Generate 3 distinct, high-quality headline options that connect the *visuals* to the *value proposition*.
+4. **Evaluation**: Critically review your 3 options. Which one is the most catchy? Which one fits the requested Tone best? Which one is short and punchy (Max 6 words)?
+5. **Selection**: Pick the single best option.
 
 STRICT OUTPUT RULES:
 1. Output MUST be valid JSON only. No markdown formatting like \`\`\`json.
@@ -70,22 +77,22 @@ STRICT OUTPUT RULES:
 3. Use Title Case for the headline.
 4. Ensure the 'highlight' word exists inside the 'headline'.`;
 
-  let userPrompt = 'Analyze this app screenshot.';
+  let userPrompt = `Here is the App Context and the Screenshot to analyze:`;
 
   if (appName) {
-    userPrompt += ` App Name: "${appName}".`;
+    userPrompt += `\n\nAPP NAME: "${appName}"`;
   }
 
   if (description) {
-    userPrompt += ` Context: "${description}".`;
+    userPrompt += `\nAPP DESCRIPTION: "${description}"`;
   }
 
   if (tone) {
-    userPrompt += ` Tone: "${tone}".`;
+    userPrompt += `\nREQUESTED TONE: "${tone}"`;
   }
 
-  userPrompt += ` TARGET LANGUAGE: ${language}. Write the headline in ${language}.`;
-  userPrompt += `\n\nGenerate the JSON response. Focus on benefits. Make the design pop!`;
+  userPrompt += `\nTARGET LANGUAGE: ${language}. (Write the headline in ${language})`;
+  userPrompt += `\n\nTASK: Analyze the screenshot in the context of the app description. Generate the single best JSON response based on your internal evaluation.`;
 
   try {
     const response = await fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
@@ -138,26 +145,26 @@ STRICT OUTPUT RULES:
     rawContent = rawContent.replace(/```json/g, '').replace(/```/g, '').trim();
 
     try {
-        const parsed: AIResponse = JSON.parse(rawContent);
-        
-        // Fallbacks if AI misses fields
-        return {
-            headline: parsed.headline || "Amazing Feature",
-            highlight: parsed.highlight || "",
-            icon: parsed.icon || "sparkles",
-            color: parsed.color || "#fbbf24",
-            creditsRemaining: creditResult.remaining
-        };
+      const parsed: AIResponse = JSON.parse(rawContent);
+
+      // Fallbacks if AI misses fields
+      return {
+        headline: parsed.headline || "Amazing Feature",
+        highlight: parsed.highlight || "",
+        icon: parsed.icon || "sparkles",
+        color: parsed.color || "#fbbf24",
+        creditsRemaining: 100 // Mock credit remaining since we bypassed check
+      };
     } catch (e) {
-        console.error("JSON Parse Error:", e);
-        // Fallback logic
-        return {
-            headline: "Experience The Best",
-            highlight: "Best",
-            icon: "star",
-            color: "#fbbf24",
-            creditsRemaining: creditResult.remaining
-        };
+      console.error("JSON Parse Error:", e);
+      // Fallback logic
+      return {
+        headline: "Experience The Best",
+        highlight: "Best",
+        icon: "star",
+        color: "#fbbf24",
+        creditsRemaining: 100 // Mock credit remaining
+      };
     }
 
   } catch (error) {
@@ -167,10 +174,10 @@ STRICT OUTPUT RULES:
       throw error; // Kredi hatasını yukarı fırlat
     }
     return {
-        headline: "Error Generating",
-        highlight: "",
-        icon: "alert-circle",
-        color: "#ef4444"
+      headline: "Error Generating",
+      highlight: "",
+      icon: "alert-circle",
+      color: "#ef4444"
     };
   }
 }

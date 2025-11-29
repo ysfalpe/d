@@ -7,8 +7,12 @@ export interface CaptionData {
 
 export interface Screenshot {
   id: string;
-  file: File;
+  type: 'screenshot' | 'cover';
+  file?: File;
+  imageDataUrl?: string; // Base64 data URL for reliable export
   caption: CaptionData; // Updated from string to object
-  background: string; 
+  background: string;
+  layout: 'text-top' | 'text-bottom' | 'phone-only';
+  font: string;
   isGenerating: boolean;
 }

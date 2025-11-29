@@ -44,11 +44,13 @@ export default function EditorPage() {
     const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
     const [isGlobalGenerating, setIsGlobalGenerating] = useState(false);
     const [isExporting, setIsExporting] = useState(false);
-    
+
     const [appName, setAppName] = useState('');
     const [description, setDescription] = useState('');
     const [tone, setTone] = useState('Professional & Trustworthy');
+    const [appIcon, setAppIcon] = useState<File | null>(null);
     const [language, setLanguage] = useState('English');
+    const [backgroundColor, setBackgroundColor] = useState('#667eea');
 
     // URL params (checkout success kontrolü)
     const searchParams = useSearchParams();
@@ -79,13 +81,13 @@ export default function EditorPage() {
 
     useEffect(() => {
         refreshCredits();
-        
+
         // Checkout'tan başarılı dönüş kontrolü
         if (searchParams.get('success') === 'true') {
             setShowSuccessMessage(true);
             // URL'den success parametresini temizle
             window.history.replaceState({}, '', '/editor');
-            
+
             // Kredileri birkaç kez yenile (webhook gecikebilir)
             const retryRefresh = async () => {
                 for (let i = 0; i < 5; i++) {
@@ -98,19 +100,37 @@ export default function EditorPage() {
         }
     }, [searchParams]);
 
-    const handleUpload = (files: File[]) => {
-        const newScreenshots: Screenshot[] = files.map(file => ({
-            id: Math.random().toString(36).substring(7),
-            file,
-            caption: {
-                text: '',
-                highlight: '',
-                icon: 'sparkles',
-                color: '#ffffff'
-            }, 
-            background: 'linear-gradient(160deg, #4f46e5 0%, #9333ea 100%)',
-            isGenerating: false
-        }));
+    const fileToDataUrl = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const handleUpload = async (files: File[]) => {
+        const newScreenshots: Screenshot[] = await Promise.all(
+            files.map(async (file) => {
+                const imageDataUrl = await fileToDataUrl(file);
+                return {
+                    id: Math.random().toString(36).substring(7),
+                    type: 'screenshot' as const,
+                    file,
+                    imageDataUrl,
+                    caption: {
+                        text: '',
+                        highlight: '',
+                        icon: 'sparkles',
+                        color: '#ffffff'
+                    },
+                    background: backgroundColor,
+                    layout: 'text-top' as const,
+                    font: 'Inter',
+                    isGenerating: false
+                };
+            })
+        );
         setScreenshots(prev => [...prev, ...newScreenshots]);
     };
 
@@ -122,7 +142,7 @@ export default function EditorPage() {
                 const canvas = document.createElement('canvas');
                 const MAX_WIDTH = 800;
                 const scaleSize = MAX_WIDTH / img.width;
-                
+
                 if (scaleSize < 1) {
                     canvas.width = MAX_WIDTH;
                     canvas.height = img.height * scaleSize;
@@ -148,11 +168,11 @@ export default function EditorPage() {
     const handleGenerateAI = async () => {
         if (screenshots.length === 0) return;
 
-        // Kredi kontrolü (Pro değilse ve yeterli kredi yoksa)
-        if (!isPro && (credits === null || credits < screenshots.length)) {
-            setShowUpgradeModal(true);
-            return;
-        }
+        // Kredi kontrolü (Pro değilse ve yeterli kredi yoksa) - TEMPORARY BYPASS
+        // if (!isPro && (credits === null || credits < screenshots.length)) {
+        //     setShowUpgradeModal(true);
+        //     return;
+        // }
 
         setIsGlobalGenerating(true);
 
@@ -168,8 +188,33 @@ export default function EditorPage() {
 
         const promises = optimisticScreenshots.map(async (shot) => {
             try {
+                // Handle Cover Slide
+                if (shot.type === 'cover') {
+                    // For cover, we don't have an image. We just generate a catchy slogan based on app info.
+                    // We can reuse the generateCaptionAction but pass a placeholder or modify it to accept no image.
+                    // For now, let's just simulate a "Slogan Generation" by calling the same action with a dummy 1x1 pixel image
+                    // or better, let's just skip AI for cover for now and set a default if empty, 
+                    // OR use the description to generate a slogan.
+
+                    // Let's use a simple placeholder logic for now to avoid complex AI changes for text-only
+                    // In a real scenario, we'd have a separate 'generateSlogan' action.
+                    return {
+                        ...shot,
+                        caption: {
+                            text: appName || "Your App Name",
+                            highlight: "App",
+                            icon: "star",
+                            color: "#fbbf24"
+                        },
+                        isGenerating: false
+                    };
+                }
+
+                // Handle Screenshot Slide
+                if (!shot.file) throw new Error('No file for screenshot');
+
                 const base64 = await compressImage(shot.file);
-                
+
                 const aiData: AIResponse = await generateCaptionAction(base64, {
                     appName,
                     description,
@@ -181,9 +226,9 @@ export default function EditorPage() {
                 if (aiData.creditsRemaining !== undefined && aiData.creditsRemaining >= 0) {
                     lastCredits = aiData.creditsRemaining;
                 }
-                
-                return { 
-                    ...shot, 
+
+                return {
+                    ...shot,
                     caption: {
                         text: aiData.headline,
                         highlight: aiData.highlight,
@@ -194,16 +239,16 @@ export default function EditorPage() {
                 };
             } catch (error) {
                 console.error(`Error generating for ${shot.id}:`, error);
-                
+
                 // Kredi hatası kontrolü
                 if (error instanceof Error && error.message.includes('credits')) {
                     setShowUpgradeModal(true);
                 }
 
-                return { 
-                    ...shot, 
-                    caption: { text: "Failed", highlight: "", icon: "alert-triangle", color: "#fff" }, 
-                    isGenerating: false 
+                return {
+                    ...shot,
+                    caption: { text: "Failed", highlight: "", icon: "alert-triangle", color: "#fff" },
+                    isGenerating: false
                 };
             }
         });
@@ -218,7 +263,7 @@ export default function EditorPage() {
 
     // Update only text for manual editing (complex editing would require more UI)
     const handleCaptionChange = (id: string, newText: string) => {
-        setScreenshots(prev => prev.map(shot => 
+        setScreenshots(prev => prev.map(shot =>
             shot.id === id ? { ...shot, caption: { ...shot.caption, text: newText } } : shot
         ));
     };
@@ -231,11 +276,26 @@ export default function EditorPage() {
             for (const shot of screenshots) {
                 const element = document.getElementById(`screenshot-card-${shot.id}`);
                 if (element) {
-                    const dataUrl = await toPng(element, { cacheBust: true, pixelRatio: 2 });
-                    const link = document.createElement('a');
-                    link.download = `appshot-${shot.id}.png`;
-                    link.href = dataUrl;
-                    link.click();
+                    try {
+                        const dataUrl = await toPng(element, { 
+                            cacheBust: true, 
+                            pixelRatio: 2,
+                            skipFonts: true,
+                            filter: (node: HTMLElement) => {
+                                // Skip problematic elements if needed
+                                return true;
+                            }
+                        });
+                        const link = document.createElement('a');
+                        link.download = `appshot-${shot.id}.png`;
+                        link.href = dataUrl;
+                        link.click();
+                        
+                        // Small delay between downloads
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                    } catch (err) {
+                        console.error(`Failed to export ${shot.id}:`, err);
+                    }
                 }
             }
         } catch (error) {
@@ -249,16 +309,45 @@ export default function EditorPage() {
     const handleShuffleBackground = (id: string) => {
         const gradients = GRADIENTS_BY_VIBE[tone] || GRADIENTS_BY_VIBE['Professional & Trustworthy'];
         const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
-        
-        setScreenshots(prev => prev.map(shot => 
+
+        setScreenshots(prev => prev.map(shot =>
             shot.id === id ? { ...shot, background: randomGradient } : shot
         ));
+    };
+
+    const handleDelete = (id: string) => {
+        setScreenshots(prev => prev.filter(shot => shot.id !== id));
+    };
+
+    const handleBackgroundChange = (color: string) => {
+        setBackgroundColor(color);
+        // Apply to all existing screenshots
+        setScreenshots(prev => prev.map(s => ({ ...s, background: color })));
+    };
+
+    const handleAddCover = () => {
+        const newCover: Screenshot = {
+            id: Math.random().toString(36).substring(7),
+            type: 'cover',
+            caption: {
+                text: appName || 'My App',
+                highlight: description || 'Your tagline here',
+                icon: 'zap',
+                color: '#fbbf24'
+            },
+            background: backgroundColor,
+            layout: 'text-top',
+            font: 'Inter',
+            isGenerating: false
+        };
+        // Add to the BEGINNING of the list
+        setScreenshots(prev => [newCover, ...prev]);
     };
 
     return (
         <div className={styles.page}>
             <Header />
-            
+
             {/* Success Toast */}
             {showSuccessMessage && (
                 <div className={styles.successToast}>
@@ -285,18 +374,24 @@ export default function EditorPage() {
                     isPro={isPro}
                     isLoadingCredits={creditsLoading}
                     onUpgradeClick={() => setShowUpgradeModal(true)}
+                    screenshotCount={screenshots.length}
+                    backgroundColor={backgroundColor}
+                    setBackgroundColor={handleBackgroundChange}
+                    onAddCover={handleAddCover}
                 />
                 <PreviewCanvas
                     screenshots={screenshots}
                     onUpload={handleUpload}
                     onCaptionChange={handleCaptionChange}
                     onShuffleBackground={handleShuffleBackground}
+                    onDelete={handleDelete}
+                    appIcon={appIcon}
                 />
             </main>
 
-            <UpgradeModal 
-                isOpen={showUpgradeModal} 
-                onClose={() => setShowUpgradeModal(false)} 
+            <UpgradeModal
+                isOpen={showUpgradeModal}
+                onClose={() => setShowUpgradeModal(false)}
             />
         </div>
     );

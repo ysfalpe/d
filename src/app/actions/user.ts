@@ -2,8 +2,11 @@
 
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function getUserSubscription() {
+  noStore(); // Disable caching - always fetch fresh data
+  
   const { userId } = await auth();
 
   if (!userId) return null;
@@ -76,6 +79,8 @@ export async function useCredit(): Promise<{ success: boolean; remaining: number
 
 // Kredi durumunu kontrol et (UI için)
 export async function checkCredits(): Promise<{ canGenerate: boolean; credits: number; isPro: boolean }> {
+  noStore(); // Disable caching - always fetch fresh data
+  
   const { userId } = await auth();
 
   if (!userId) {

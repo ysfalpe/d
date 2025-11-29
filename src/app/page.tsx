@@ -40,9 +40,9 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/examples">
-                  <Button variant="outline" size="lg">
-                    View Examples
-                  </Button>
+                <Button variant="outline" size="lg">
+                  View Examples
+                </Button>
                 </Link>
               </div>
             </motion.div>

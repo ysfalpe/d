@@ -42,23 +42,59 @@
 }
 
 .title {
-  font-size: 3.5rem;
-  line-height: 1.1;
+  font-size: 4.5rem;
+  /* Bigger title */
+  line-height: 1.05;
   margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  /* Richer gradient */
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientFlow 5s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .description {
-  font-size: 1.25rem;
-  color: #94a3b8;
+  font-size: 1.35rem;
+  color: var(--text-secondary);
   margin-bottom: 2.5rem;
   line-height: 1.6;
+  font-weight: 400;
+  max-width: 540px;
 }
 
 .ctaGroup {
@@ -130,8 +166,8 @@
   width: 100%;
   background: #0a0a0a;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 .glowEffect {
@@ -148,9 +184,25 @@
 
 /* Features Section */
 .features {
-  padding: 6rem 1.5rem;
-  background: #020617;
+  padding: 8rem 1.5rem;
+  background: #020202;
   position: relative;
+  /* Grid Background */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 0%, #020202 90%);
+  pointer-events: none;
 }
 
 .sectionHeader {
@@ -178,17 +230,38 @@
 }
 
 .featureCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 16px;
-  transition: all 0.3s ease;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .featureCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(56, 189, 248, 0.2);
+  transform: translateY(-8px);
+  background: rgba(30, 30, 30, 0.8);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.featureCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.featureCard:hover::after {
+  opacity: 1;
 }
 
 .featureIcon {

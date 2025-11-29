@@ -1,161 +1,28 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SIDEBAR - Minimal, Focused, Fast
+   Tasarım Felsefesi: Cognitive load azaltma, hız öncelikli
+═══════════════════════════════════════════════════════════════════════════ */
+
 .sidebar {
-    width: 280px;
-    background: #0A0A0A;
-    border-right: 1px solid #1a1a1a;
+    width: 260px;
+    min-width: 260px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-subtle);
     height: calc(100vh - 56px);
     overflow-y: auto;
-    padding: 1.25rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
-/* Sections */
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZONE 1: PRIMARY ACTION
+   - En önemli action üstte
+   - Görsel dominant
+═══════════════════════════════════════════════════════════════════════════ */
 
-.sectionHeader {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #555;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #1a1a1a;
-}
-
-/* Fields */
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
-
-.field label {
-    font-size: 0.75rem;
-    color: #666;
-    font-weight: 500;
-}
-
-.fieldRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-}
-
-.input, .textarea, .select {
-    width: 100%;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 6px;
-    padding: 0.55rem 0.7rem;
-    color: #eee;
-    font-size: 0.85rem;
-    font-family: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.input:focus, .textarea:focus, .select:focus {
-    outline: none;
-    border-color: #333;
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
-}
-
-.input::placeholder, .textarea::placeholder {
-    color: #444;
-}
-
-.textarea {
-    resize: none;
-    min-height: 70px;
-}
-
-.select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 0.6rem center;
-    background-size: 14px;
-    padding-right: 2rem;
-}
-
-.select option {
-    background: #111;
-    color: #eee;
-}
-
-/* Credits Section */
-.creditsSection {
-    padding: 0.75rem;
-    background: #0f0f0f;
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-}
-
-.creditsLoading {
-    text-align: center;
-    color: #555;
-    font-size: 0.8rem;
-}
-
-.proBadge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: #fbbf24;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.creditsInfo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.creditsCount {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #888;
-    font-size: 0.8rem;
-}
-
-.creditsCount svg {
-    color: #fbbf24;
-}
-
-.upgradeLink {
-    background: none;
-    border: none;
-    color: #818cf8;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    transition: background 0.15s;
-}
-
-.upgradeLink:hover {
-    background: rgba(129, 140, 248, 0.1);
-}
-
-/* Spacer */
-.spacer {
-    flex: 1;
-}
-
-/* Generate Button */
-.generateSection {
+.primaryZone {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -167,53 +34,372 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    background: #fff;
-    color: #000;
+    padding: 0.875rem 1rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.1s, opacity 0.15s;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 .generateBtn:hover:not(:disabled) {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
 }
 
 .generateBtn:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
 .generateBtn:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 .spinner {
     width: 16px;
     height: 16px;
-    border: 2px solid #333;
-    border-top-color: #000;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
 
-.hint {
-    font-size: 0.7rem;
-    color: #444;
-    text-align: center;
+/* Credit Badge */
+.creditBadge {
+    display: flex;
+    justify-content: center;
 }
 
-/* Export */
-.exportSection {
+.loading {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.proBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+.creditCount {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.creditCount svg {
+    color: #fbbf24;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZONE 2: APP CONTEXT
+   - App bilgileri - AI caption kalitesi için önemli
+   - Geniş description alanı
+═══════════════════════════════════════════════════════════════════════════ */
+
+.contextSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.875rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+}
+
+.identityRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+.iconArea {
+    flex-shrink: 0;
+}
+
+.iconPlaceholder {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-input);
+    border: 2px dashed var(--border-subtle);
+    border-radius: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.iconPlaceholder:hover,
+.iconArea.dragging .iconPlaceholder {
+    border-color: #6366f1;
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.iconPreview {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.iconPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.removeBtn {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    background: #ef4444;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.iconPreview:hover .removeBtn {
+    opacity: 1;
+}
+
+.appNameInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0;
+    outline: none;
+    min-width: 0;
+}
+
+.appNameInput::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.descTextarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 0.65rem 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.descTextarea:focus {
+    border-color: #6366f1;
+}
+
+.descTextarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZONE 3: SETTINGS
+   - Yan yana iki dropdown
+   - Minimal, hızlı erişim
+═══════════════════════════════════════════════════════════════════════════ */
+
+.settingsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.selectWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.selectWrapper label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.select {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 0.5rem;
+    padding-right: 1.5rem;
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    background-size: 12px;
+    transition: border-color 0.15s;
+}
+
+.select:hover {
+    border-color: var(--border-hover);
+}
+
+.select:focus {
+    outline: none;
+    border-color: #6366f1;
+}
+
+.select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COLOR PICKER
+   - Native color picker
+   - Full color freedom
+═══════════════════════════════════════════════════════════════════════════ */
+
+.colorSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.colorLabel {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.colorPickerRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.65rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+}
+
+.colorPicker {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+.colorPicker::-moz-color-swatch {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+.colorValue {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ADD COVER
+═══════════════════════════════════════════════════════════════════════════ */
+
+.addCoverBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0.6rem;
+    background: transparent;
+    border: 1px dashed var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.addCoverBtn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPACER
+═══════════════════════════════════════════════════════════════════════════ */
+
+.spacer {
+    flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZONE 4: FOOTER
+   - Secondary actions
+   - Her zaman erişilebilir
+═══════════════════════════════════════════════════════════════════════════ */
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     padding-top: 0.75rem;
-    border-top: 1px solid #1a1a1a;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .exportBtn {
@@ -224,9 +410,9 @@
     gap: 0.5rem;
     padding: 0.6rem 1rem;
     background: transparent;
-    color: #888;
-    border: 1px solid #222;
-    border-radius: 6px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
     font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
@@ -234,12 +420,34 @@
 }
 
 .exportBtn:hover:not(:disabled) {
-    background: #111;
-    color: #fff;
-    border-color: #333;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-hover);
 }
 
 .exportBtn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
+}
+
+.upgradeBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.upgradeBtn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }

@@ -4,9 +4,9 @@
     left: 0;
     right: 0;
     height: 56px;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(5, 5, 5, 0.7);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 100;
     display: flex;
     align-items: center;
@@ -88,7 +88,8 @@
     font-size: 0.75rem;
     font-weight: 700;
     font-family: inherit;
-    color: #FFD700; /* Gold */
+    color: #FFD700;
+    /* Gold */
     background: rgba(255, 215, 0, 0.1);
     border: 1px solid rgba(255, 215, 0, 0.2);
     padding: 0.3rem 0.8rem;
@@ -106,8 +107,15 @@
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 .nav {
