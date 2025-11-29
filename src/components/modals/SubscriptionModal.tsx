@@ -6,7 +6,6 @@ import styles from './SubscriptionModal.module.css';
 import { Button } from '../ui/Button';
 import { 
   getSubscriptionInfo, 
-  getCustomerPortalUrl,
   SubscriptionInfo 
 } from '@/app/actions/subscription';
 
@@ -40,13 +39,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       setError('Failed to load subscription info');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleManageOnPolar = async () => {
-    const result = await getCustomerPortalUrl();
-    if (result.url) {
-      window.open(result.url, '_blank');
     }
   };
 
@@ -101,15 +93,15 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
 
             <div className={styles.actions}>
-              <button 
+              <a 
+                href="mailto:ifytech77@gmail.com?subject=Cancel%20AppShot%20Pro%20Subscription"
                 className={styles.manageBtn}
-                onClick={handleManageOnPolar}
               >
                 <ExternalLink size={16} />
-                Manage Subscription
-              </button>
+                Contact to Cancel
+              </a>
               <p className={styles.manageHint}>
-                View invoices, update payment method, or cancel on Polar
+                Send us an email at ifytech77@gmail.com to cancel your subscription
               </p>
             </div>
           </div>
