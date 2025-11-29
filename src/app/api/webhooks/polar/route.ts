@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     }
 
     // === ORDER EVENTS (One-time payments) ===
-    if (type === 'order.created' || type === 'order.paid') {
+    if (type === 'order.created') {
       const userId = getUserIdFromMetadata(data);
       const orderData = data as any;
       if (userId) {
@@ -110,14 +110,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // === PAYMENT EVENTS ===
-    if (type === 'payment.created' || type === 'payment.updated') {
-      console.log('Payment event received');
-      const userId = getUserIdFromMetadata(data);
-      if (userId && data.status === 'succeeded') {
-        await upgradeUser(userId);
-      }
-    }
 
     // === REVOCATION EVENTS ===
     if (type === 'subscription.revoked' || type === 'subscription.canceled') {
