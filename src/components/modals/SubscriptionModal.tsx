@@ -6,7 +6,6 @@ import styles from './SubscriptionModal.module.css';
 import { Button } from '../ui/Button';
 import { 
   getSubscriptionInfo, 
-  cancelSubscription, 
   getCustomerPortalUrl,
   SubscriptionInfo 
 } from '@/app/actions/subscription';
@@ -20,11 +19,8 @@ interface SubscriptionModalProps {
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ 
   isOpen, 
   onClose,
-  onSubscriptionChange 
 }) => {
   const [loading, setLoading] = useState(true);
-  const [cancelling, setCancelling] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
   const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,27 +40,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       setError('Failed to load subscription info');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleCancel = async () => {
-    setCancelling(true);
-    setError(null);
-    
-    try {
-      const result = await cancelSubscription();
-      
-      if (result.success) {
-        setShowConfirm(false);
-        await loadSubscription();
-        onSubscriptionChange?.();
-      } else {
-        setError(result.error || 'Failed to cancel subscription');
-      }
-    } catch (e) {
-      setError('An unexpected error occurred');
-    } finally {
-      setCancelling(false);
     }
   };
 
@@ -131,39 +106,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 onClick={handleManageOnPolar}
               >
                 <ExternalLink size={16} />
-                Manage on Polar
+                Manage Subscription
               </button>
-
-              {!showConfirm ? (
-                <button 
-                  className={styles.cancelBtn}
-                  onClick={() => setShowConfirm(true)}
-                >
-                  Cancel Subscription
-                </button>
-              ) : (
-                <div className={styles.confirmBox}>
-                  <p className={styles.confirmText}>
-                    <AlertTriangle size={16} />
-                    Are you sure? You'll lose access to Pro features.
-                  </p>
-                  <div className={styles.confirmActions}>
-                    <button 
-                      className={styles.confirmCancelBtn}
-                      onClick={handleCancel}
-                      disabled={cancelling}
-                    >
-                      {cancelling ? 'Cancelling...' : 'Yes, Cancel'}
-                    </button>
-                    <button 
-                      className={styles.confirmKeepBtn}
-                      onClick={() => setShowConfirm(false)}
-                    >
-                      Keep Subscription
-                    </button>
-                  </div>
-                </div>
-              )}
+              <p className={styles.manageHint}>
+                View invoices, update payment method, or cancel on Polar
+              </p>
             </div>
           </div>
         ) : (
