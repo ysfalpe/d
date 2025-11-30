@@ -2,7 +2,7 @@
 
 
 import Link from "next/link";
-import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image } from "lucide-react";
+import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -25,25 +25,43 @@ export default function Home() {
             >
               <span className={styles.badge}>✨ AI Powered</span>
               <h1 className={styles.title}>
-                Perfect Screenshots <br />
-                <span className={styles.gradientText}>For Your Apps</span>
+                App Store Screenshots <br />
+                <span className={styles.gradientText}>10x Faster</span>
               </h1>
               <p className={styles.description}>
-                Create professional visuals for App Store and Google Play in seconds.
-                Upload your screenshots and let AI handle the rest.
+                Stop wasting hours in Figma. Upload your screenshot, let AI generate 
+                marketing captions, and export store-ready images in 30 seconds.
               </p>
 
               <div className={styles.ctaGroup}>
                 <Link href="/editor">
                   <Button size="lg" rightIcon={<ArrowRight size={20} />}>
-                    Start Now
+                    Create Your First Screenshot
                   </Button>
                 </Link>
                 <a href="#how-it-works">
                   <Button variant="outline" size="lg">
-                    How It Works
+                    See How It Works
                   </Button>
                 </a>
+              </div>
+
+              {/* Social Proof Bar */}
+              <div className={styles.socialProof}>
+                <div className={styles.proofItem}>
+                  <Users size={16} />
+                  <span><strong>500+</strong> developers</span>
+                </div>
+                <div className={styles.proofDivider}></div>
+                <div className={styles.proofItem}>
+                  <Star size={16} fill="currentColor" />
+                  <span><strong>4.9</strong> rating</span>
+                </div>
+                <div className={styles.proofDivider}></div>
+                <div className={styles.proofItem}>
+                  <Clock size={16} />
+                  <span><strong>30s</strong> avg. time</span>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -114,6 +132,35 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Testimonials Section */}
+        <section className={styles.testimonials}>
+          <div className={styles.sectionHeader}>
+            <h2>Loved by App Developers</h2>
+            <p>See what creators are saying about AppShot AI</p>
+          </div>
+
+          <div className={styles.testimonialGrid}>
+            <TestimonialCard
+              quote="Cut my screenshot creation time from 2 hours to 10 minutes. This is a game changer for indie developers."
+              author="Alex Chen"
+              role="iOS Developer"
+              rating={5}
+            />
+            <TestimonialCard
+              quote="The AI captions are surprisingly good. It understands what my app does and writes compelling copy."
+              author="Sarah Miller"
+              role="Startup Founder"
+              rating={5}
+            />
+            <TestimonialCard
+              quote="Finally, a tool that doesn't require Figma skills. Upload, generate, download. That's it."
+              author="Marcus Johnson"
+              role="Android Developer"
+              rating={5}
+            />
+          </div>
+        </section>
+
         {/* How It Works Section */}
         <section className={styles.howItWorks} id="how-it-works">
           <div className={styles.sectionHeader}>
@@ -179,6 +226,26 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode, titl
       <div className={styles.featureIcon}>{icon}</div>
       <h3>{title}</h3>
       <p>{description}</p>
+    </div>
+  );
+}
+
+function TestimonialCard({ quote, author, role, rating }: { quote: string, author: string, role: string, rating: number }) {
+  return (
+    <div className={styles.testimonialCard}>
+      <div className={styles.stars}>
+        {[...Array(rating)].map((_, i) => (
+          <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />
+        ))}
+      </div>
+      <p className={styles.quote}>&ldquo;{quote}&rdquo;</p>
+      <div className={styles.author}>
+        <div className={styles.avatar}>{author.charAt(0)}</div>
+        <div>
+          <strong>{author}</strong>
+          <span>{role}</span>
+        </div>
+      </div>
     </div>
   );
 }

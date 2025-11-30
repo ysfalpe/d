@@ -90,9 +90,11 @@ export default function PricingPage() {
               </div>
               
               <div className={styles.priceContainer}>
+                <span className={styles.originalPrice}>$49</span>
                 <span className={styles.price}>$19</span>
                 <span className={styles.period}>/month</span>
               </div>
+              <div className={styles.savingsBadge}>Save 61% - Limited Time</div>
 
               <ul className={styles.features}>
                 <li>

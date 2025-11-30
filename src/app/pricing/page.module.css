@@ -132,9 +132,16 @@
 /* Price */
 .priceContainer {
   text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid #1a1a1a;
+}
+
+.originalPrice {
+  font-size: 1.5rem;
+  color: #666;
+  text-decoration: line-through;
+  margin-right: 0.5rem;
 }
 
 .price {
@@ -145,6 +152,17 @@
 .period {
   font-size: 1rem;
   color: #666;
+}
+
+.savingsBadge {
+  text-align: center;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
 }
 
 /* Features */
