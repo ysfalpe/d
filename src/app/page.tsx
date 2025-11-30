@@ -46,7 +46,7 @@ export default function Home() {
                 </a>
               </div>
               <p className={styles.trialNote}>
-                ✓ 3 days free • No credit card required • $19.99/mo after trial
+                ✓ 3 days free • Cancel anytime • $19.99/mo after trial
               </p>
 
               {/* Social Proof Bar */}

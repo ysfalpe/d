@@ -21,7 +21,7 @@ export default function PricingPage() {
           >
             <div className={styles.trialBanner}>
               <span className={styles.trialIcon}>🎉</span>
-              <span>Start with <strong>3 DAYS FREE</strong> — No credit card required to try</span>
+              <span>Start with <strong>3 DAYS FREE</strong> — Cancel anytime during trial</span>
             </div>
             <h1 className={styles.title}>Simple, Transparent Pricing</h1>
             <p className={styles.subtitle}>
