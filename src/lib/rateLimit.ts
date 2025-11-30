@@ -99,9 +99,9 @@ export async function getRateLimitStatus(userId: string): Promise<{
     ]);
 
     return {
-      minute: { remaining: minuteResult, limit: 10 },
-      daily: { remaining: dailyResult, limit: 100 },
-      monthly: { remaining: monthlyResult, limit: 1000 },
+      minute: { remaining: minuteResult.remaining, limit: 10 },
+      daily: { remaining: dailyResult.remaining, limit: 100 },
+      monthly: { remaining: monthlyResult.remaining, limit: 1000 },
     };
   } catch (error) {
     console.error("Get rate limit status error:", error);
