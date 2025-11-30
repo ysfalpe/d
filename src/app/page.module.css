@@ -102,6 +102,13 @@
   gap: 1rem;
 }
 
+.trialNote {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
 /* Social Proof Bar */
 .socialProof {
   display: flex;

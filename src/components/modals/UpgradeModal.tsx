@@ -44,6 +44,7 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose }) =
                 </button>
 
                 <div className={styles.header}>
+                    <div className={styles.trialBadge}>🎉 3 DAYS FREE</div>
                     <div className={styles.iconWrapper}>
                         <Zap size={24} fill="currentColor" />
                     </div>
@@ -86,10 +87,15 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose }) =
                         onClick={handleUpgrade}
                         disabled={loading}
                     >
-                        {loading ? 'Redirecting...' : 'Get Pro Access'}
+                        {loading ? (
+                            <>
+                                <Loader2 size={18} className={styles.spinner} />
+                                Redirecting...
+                            </>
+                        ) : 'Start 3-Day Free Trial'}
                     </Button>
                     
-                    <p className={styles.guarantee}>7-day money-back guarantee</p>
+                    <p className={styles.guarantee}>✓ No charge for 3 days • Cancel anytime</p>
                 </div>
             </div>
         </div>

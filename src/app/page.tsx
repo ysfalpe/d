@@ -23,7 +23,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className={styles.badge}>✨ AI Powered</span>
+              <span className={styles.badge}>🎉 3 Days FREE Trial</span>
               <h1 className={styles.title}>
                 App Store Screenshots <br />
                 <span className={styles.gradientText}>10x Faster</span>
@@ -36,7 +36,7 @@ export default function Home() {
               <div className={styles.ctaGroup}>
                 <Link href="/editor">
                   <Button size="lg" rightIcon={<ArrowRight size={20} />}>
-                    Create Your First Screenshot
+                    Start Free Trial
                   </Button>
                 </Link>
                 <a href="#how-it-works">
@@ -45,6 +45,9 @@ export default function Home() {
                   </Button>
                 </a>
               </div>
+              <p className={styles.trialNote}>
+                ✓ 3 days free • No credit card required • $19.99/mo after trial
+              </p>
 
               {/* Social Proof Bar */}
               <div className={styles.socialProof}>

@@ -19,6 +19,10 @@ export default function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <div className={styles.trialBanner}>
+              <span className={styles.trialIcon}>🎉</span>
+              <span>Start with <strong>3 DAYS FREE</strong> — No credit card required to try</span>
+            </div>
             <h1 className={styles.title}>Simple, Transparent Pricing</h1>
             <p className={styles.subtitle}>
               Start creating stunning app screenshots today
@@ -79,7 +83,7 @@ export default function PricingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className={styles.popularBadge}>Most Popular</div>
+              <div className={styles.popularBadge}>🔥 3 Days FREE Trial</div>
               
               <div className={styles.cardHeader}>
                 <div className={styles.planIconPro}>
@@ -124,11 +128,11 @@ export default function PricingPage() {
               </ul>
 
               <Link href="/editor" className={styles.primaryBtn}>
-                Get Pro Access
+                Start 3-Day Free Trial
                 <ArrowRight size={18} />
               </Link>
 
-              <p className={styles.guarantee}>7-day money-back guarantee</p>
+              <p className={styles.guarantee}>✓ Cancel anytime during trial • 7-day money-back guarantee</p>
             </motion.div>
           </div>
         </section>
