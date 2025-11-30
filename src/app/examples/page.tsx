@@ -79,7 +79,7 @@ export default function ExamplesPage() {
           >
             <h1 className={styles.title}>Example Screenshots</h1>
             <p className={styles.subtitle}>
-              See what you can create with AppShot AI
+              See what you can create with Shotsy
             </p>
           </motion.div>
         </section>

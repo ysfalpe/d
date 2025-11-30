@@ -15,7 +15,7 @@ export default function PrivacyPage() {
           <section className={styles.section}>
             <h2>1. Information We Collect</h2>
             <p>
-              When you use AppShot AI, we collect information you provide directly to us, such as:
+              When you use Shotsy, we collect information you provide directly to us, such as:
             </p>
             <ul>
               <li>Account information (email address, name)</li>
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
             <p>
               If you have any questions about this Privacy Policy, please contact us at:
               <br />
-              <a href="mailto:privacy@appshot.ai">privacy@appshot.ai</a>
+              <a href="mailto:ifytech77@gmail.com">ifytech77@gmail.com</a>
             </p>
           </section>
         </div>

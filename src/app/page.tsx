@@ -104,7 +104,7 @@ export default function Home() {
         {/* Features Section */}
         <section className={styles.features} id="features">
           <div className={styles.sectionHeader}>
-            <h2>Why AppShot AI?</h2>
+            <h2>Why Shotsy?</h2>
             <p>Features to make your app stand out in the store</p>
           </div>
 
@@ -136,7 +136,7 @@ export default function Home() {
         <section className={styles.testimonials}>
           <div className={styles.sectionHeader}>
             <h2>Loved by App Developers</h2>
-            <p>See what creators are saying about AppShot AI</p>
+            <p>See what creators are saying about Shotsy</p>
           </div>
 
           <div className={styles.testimonialGrid}>

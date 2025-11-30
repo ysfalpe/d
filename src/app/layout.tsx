@@ -10,22 +10,22 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "AppShot AI - Create Stunning App Store Screenshots",
+  title: "Shotsy - Create Stunning App Store Screenshots",
   description: "Generate professional App Store and Play Store screenshots in seconds with AI. Upload your screenshots, let AI create marketing captions, and download in all required sizes.",
   keywords: ["app store screenshots", "play store screenshots", "ASO", "app marketing", "AI screenshot generator"],
-  authors: [{ name: "AppShot AI" }],
+  authors: [{ name: "Shotsy" }],
   openGraph: {
-    title: "AppShot AI - Create Stunning App Store Screenshots",
+    title: "Shotsy - Create Stunning App Store Screenshots",
     description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
     url: "https://d-sigma-five.vercel.app",
-    siteName: "AppShot AI",
+    siteName: "Shotsy",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AppShot AI - Create Stunning App Store Screenshots",
-  description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
+    title: "Shotsy - Create Stunning App Store Screenshots",
+    description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
   },
   robots: {
     index: true,

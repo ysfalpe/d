@@ -94,7 +94,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             <div className={styles.actions}>
               <a 
-                href="mailto:ifytech77@gmail.com?subject=Cancel%20AppShot%20Pro%20Subscription"
+                href="mailto:ifytech77@gmail.com?subject=Cancel%20Shotsy%20Pro%20Subscription"
                 className={styles.manageBtn}
               >
                 <ExternalLink size={16} />

@@ -107,7 +107,7 @@ STRICT OUTPUT RULES:
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': APP_URL,
-        'X-Title': 'AppShot AI',
+        'X-Title': 'Shotsy',
       },
       body: JSON.stringify({
         model: 'google/gemini-2.5-flash-lite',

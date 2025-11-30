@@ -44,8 +44,7 @@ export const Header = () => {
                         <div className={styles.logoIcon}>
                             <Sparkles size={18} />
                         </div>
-                        <span className={styles.logoText}>AppShot</span>
-                        <span className={styles.badge}>AI</span>
+                        <span className={styles.logoText}>Shotsy</span>
                     </Link>
 
                     <div className={styles.center}>
