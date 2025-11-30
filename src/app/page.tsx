@@ -161,7 +161,7 @@ export default function Home() {
           <div className={styles.ctaCenter}>
             <Link href="/editor">
               <Button size="lg" rightIcon={<ArrowRight size={20} />}>
-                Try It Now - It&apos;s Free
+                Start Creating
               </Button>
             </Link>
           </div>
