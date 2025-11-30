@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
 
 const POLAR_ACCESS_TOKEN = process.env.POLAR_ACCESS_TOKEN;
+const POLAR_PRODUCT_ID = process.env.POLAR_PRODUCT_ID;
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://d-sigma-five.vercel.app';
 const POLAR_API_URL = process.env.POLAR_SERVER === 'sandbox' 
     ? 'https://sandbox-api.polar.sh/v1' 
     : 'https://api.polar.sh/v1';
@@ -16,8 +18,8 @@ export async function createCheckoutAction() {
     throw new Error('Not authenticated');
   }
 
-  if (!POLAR_ACCESS_TOKEN) {
-    throw new Error('Missing Polar Access Token');
+  if (!POLAR_ACCESS_TOKEN || !POLAR_PRODUCT_ID) {
+    throw new Error('Missing Polar configuration');
   }
 
   let checkoutUrl: string | null = null;
@@ -30,8 +32,8 @@ export async function createCheckoutAction() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        product_id: '60c91b2c-daad-42be-83ec-8951215db507',
-        success_url: 'https://d-sigma-five.vercel.app/editor?success=true',
+        product_id: POLAR_PRODUCT_ID,
+        success_url: `${APP_URL}/editor?success=true`,
         metadata: {
           userId: userId,
         },

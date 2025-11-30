@@ -6,6 +6,7 @@ import { rateLimit } from '@/lib/rateLimit';
 
 const OPENROUTER_API_KEY = process.env.OPENAI_API_KEY;
 const OPENROUTER_BASE_URL = process.env.OPENAI_BASE_URL || 'https://openrouter.ai/api/v1';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://d-sigma-five.vercel.app';
 
 interface GenerateOptions {
   appName?: string;
@@ -46,12 +47,12 @@ export async function generateCaptionAction(imageBase64: string, options: Genera
     throw new Error('Image too large. Please use an image smaller than 5MB.');
   }
 
-  // Kredi kontrolü - TEMPORARY BYPASS
-  // const creditResult = await useCredit();
+  // Kredi kontrolü (Pro kullanıcılar sınırsız, free kullanıcılar kredi kullanır)
+  const creditResult = await useCredit();
 
-  // if (!creditResult.success) {
-  //   throw new Error(creditResult.error || 'No credits remaining. Please upgrade to Pro.');
-  // }
+  if (!creditResult.success) {
+    throw new Error(creditResult.error || 'No credits remaining. Please upgrade to Pro.');
+  }
 
   if (!OPENROUTER_API_KEY) {
     throw new Error('API Key is missing');
@@ -105,7 +106,7 @@ STRICT OUTPUT RULES:
       headers: {
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://d-sigma-five.vercel.app',
+        'HTTP-Referer': APP_URL,
         'X-Title': 'AppShot AI',
       },
       body: JSON.stringify({
@@ -158,7 +159,7 @@ STRICT OUTPUT RULES:
         highlight: parsed.highlight || "",
         icon: parsed.icon || "sparkles",
         color: parsed.color || "#fbbf24",
-        creditsRemaining: 100 // Mock credit remaining since we bypassed check
+        creditsRemaining: creditResult.remaining
       };
     } catch (e) {
       console.error("JSON Parse Error:", e);
@@ -168,7 +169,7 @@ STRICT OUTPUT RULES:
         highlight: "Best",
         icon: "star",
         color: "#fbbf24",
-        creditsRemaining: 100 // Mock credit remaining
+        creditsRemaining: creditResult.remaining
       };
     }
 

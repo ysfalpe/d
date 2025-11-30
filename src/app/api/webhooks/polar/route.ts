@@ -6,8 +6,11 @@ export async function POST(req: NextRequest) {
   const bodyText = await req.text();
   const webhookSecret = process.env.POLAR_WEBHOOK_SECRET;
 
-  console.log('=== POLAR WEBHOOK RECEIVED ===');
-  console.log('Body:', bodyText.substring(0, 500)); // İlk 500 karakter
+  // Production'da minimal loglama
+  const isDev = process.env.NODE_ENV === 'development';
+  if (isDev) {
+    console.log('=== POLAR WEBHOOK RECEIVED ===');
+  }
 
   if (!webhookSecret) {
     console.error('Missing POLAR_WEBHOOK_SECRET');
@@ -32,10 +35,13 @@ export async function POST(req: NextRequest) {
 
   const { type, data } = event;
   
-  // DETAYLI LOGLAMA
-  console.log('=== WEBHOOK EVENT ===');
-  console.log('Type:', type);
-  console.log('Data:', JSON.stringify(data, null, 2));
+  // Production'da sadece event type logla
+  if (isDev) {
+    console.log('Webhook Event Type:', type);
+    console.log('Webhook Data:', JSON.stringify(data, null, 2));
+  } else {
+    console.log('Webhook:', type);
+  }
 
   try {
     // Helper: metadata'dan userId'yi güvenli şekilde al
@@ -47,13 +53,13 @@ export async function POST(req: NextRequest) {
         return null;
       }
       const userId = metadata.userId || metadata.user_id;
-      console.log('Found userId:', userId);
+      if (isDev) console.log('Found userId:', userId);
       return typeof userId === 'string' ? userId : null;
     };
 
     // Helper: Kullanıcıyı Pro yap
     const upgradeUser = async (userId: string, subscriptionId?: string, customerId?: string) => {
-      console.log(`Upgrading user ${userId} to Pro`);
+      if (isDev) console.log(`Upgrading user ${userId} to Pro`);
       
       // Önce kullanıcı var mı kontrol et
       const existingUser = await db.user.findUnique({ where: { id: userId } });
@@ -67,7 +73,7 @@ export async function POST(req: NextRequest) {
             polarCustomerId: customerId || existingUser.polarCustomerId
           }
         });
-        console.log(`User ${userId} upgraded successfully`);
+        if (isDev) console.log(`User ${userId} upgraded successfully`);
       } else {
         // Kullanıcı yoksa oluştur
         await db.user.create({
@@ -80,7 +86,7 @@ export async function POST(req: NextRequest) {
             polarCustomerId: customerId
           }
         });
-        console.log(`User ${userId} created and upgraded`);
+        if (isDev) console.log(`User ${userId} created and upgraded`);
       }
     };
 
@@ -96,7 +102,7 @@ export async function POST(req: NextRequest) {
 
     // === CHECKOUT EVENTS ===
     if (type === 'checkout.created' || type === 'checkout.updated') {
-      console.log('Checkout event - waiting for completion');
+      if (isDev) console.log('Checkout event - waiting for completion');
     }
 
     // === ORDER EVENTS (One-time payments) ===
@@ -116,7 +122,7 @@ export async function POST(req: NextRequest) {
       if (type === 'subscription.revoked') {
         const userId = getUserIdFromMetadata(data);
         if (userId) {
-          console.log(`Downgrading user ${userId}`);
+          if (isDev) console.log(`Downgrading user ${userId}`);
           await db.user.update({
             where: { id: userId },
             data: { isPro: false }
@@ -125,7 +131,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    console.log('=== WEBHOOK PROCESSED SUCCESSFULLY ===');
+    if (isDev) console.log('=== WEBHOOK PROCESSED SUCCESSFULLY ===');
     return NextResponse.json({ received: true });
     
   } catch (error) {
