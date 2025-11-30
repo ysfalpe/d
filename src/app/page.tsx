@@ -2,7 +2,7 @@
 
 
 import Link from "next/link";
-import { ArrowRight, Wand2, Layout, Download, Smartphone } from "lucide-react";
+import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -39,11 +39,11 @@ export default function Home() {
                     Start Now
                   </Button>
                 </Link>
-                <Link href="/examples">
-                <Button variant="outline" size="lg">
-                  View Examples
-                </Button>
-                </Link>
+                <a href="#how-it-works">
+                  <Button variant="outline" size="lg">
+                    How It Works
+                  </Button>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -111,6 +111,59 @@ export default function Home() {
               title="One-Click Download"
               description="Instantly download images in all required sizes for App Store and Google Play."
             />
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className={styles.howItWorks} id="how-it-works">
+          <div className={styles.sectionHeader}>
+            <h2>How It Works</h2>
+            <p>Create stunning app screenshots in 3 simple steps</p>
+          </div>
+
+          <div className={styles.stepsContainer}>
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>1</div>
+              <div className={styles.stepIcon}>
+                <Upload size={32} />
+              </div>
+              <h3>Upload Screenshots</h3>
+              <p>Drag and drop your app screenshots. We support all sizes and formats.</p>
+            </div>
+
+            <div className={styles.stepConnector}>
+              <ArrowRight size={24} />
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>2</div>
+              <div className={styles.stepIcon}>
+                <Sparkles size={32} />
+              </div>
+              <h3>Add App Details</h3>
+              <p>Tell us your app name and what it does. AI will generate perfect marketing captions.</p>
+            </div>
+
+            <div className={styles.stepConnector}>
+              <ArrowRight size={24} />
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepNumber}>3</div>
+              <div className={styles.stepIcon}>
+                <Image size={32} />
+              </div>
+              <h3>Download & Publish</h3>
+              <p>Export your polished screenshots and upload directly to App Store or Google Play.</p>
+            </div>
+          </div>
+
+          <div className={styles.ctaCenter}>
+            <Link href="/editor">
+              <Button size="lg" rightIcon={<ArrowRight size={20} />}>
+                Try It Now - It&apos;s Free
+              </Button>
+            </Link>
           </div>
         </section>
       </main>
