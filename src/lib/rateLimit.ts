@@ -1,49 +1,114 @@
-// Simple in-memory rate limiter
-// Not perfect for serverless but provides basic protection
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+// Redis client - Upstash env variables'dan otomatik okur
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+});
 
-interface RateLimitResult {
+// Rate limiters
+const minuteLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, "1 m"), // Dakikada 10
+  prefix: "ratelimit:minute",
+});
+
+const dailyLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(100, "1 d"), // Günde 100
+  prefix: "ratelimit:daily",
+});
+
+const monthlyLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(1000, "30 d"), // Ayda 1000
+  prefix: "ratelimit:monthly",
+});
+
+export interface RateLimitResult {
   success: boolean;
   remaining: number;
   resetIn: number; // seconds
+  limitType?: "minute" | "daily" | "monthly";
 }
 
-export function rateLimit(
-  identifier: string, 
-  limit: number = 10, 
-  windowMs: number = 60000 // 1 minute
-): RateLimitResult {
-  const now = Date.now();
-  const record = rateLimitMap.get(identifier);
-
-  // Clean up old entries periodically
-  if (rateLimitMap.size > 10000) {
-    for (const [key, value] of rateLimitMap.entries()) {
-      if (value.resetTime < now) {
-        rateLimitMap.delete(key);
-      }
+export async function rateLimit(userId: string): Promise<RateLimitResult> {
+  try {
+    // 1. Dakika limiti kontrolü
+    const minuteResult = await minuteLimit.limit(userId);
+    if (!minuteResult.success) {
+      return {
+        success: false,
+        remaining: minuteResult.remaining,
+        resetIn: Math.ceil((minuteResult.reset - Date.now()) / 1000),
+        limitType: "minute",
+      };
     }
-  }
 
-  if (!record || record.resetTime < now) {
-    // New window
-    rateLimitMap.set(identifier, {
-      count: 1,
-      resetTime: now + windowMs
-    });
-    return { success: true, remaining: limit - 1, resetIn: Math.ceil(windowMs / 1000) };
-  }
+    // 2. Günlük limit kontrolü
+    const dailyResult = await dailyLimit.limit(userId);
+    if (!dailyResult.success) {
+      return {
+        success: false,
+        remaining: dailyResult.remaining,
+        resetIn: Math.ceil((dailyResult.reset - Date.now()) / 1000),
+        limitType: "daily",
+      };
+    }
 
-  if (record.count >= limit) {
-    // Rate limited
-    const resetIn = Math.ceil((record.resetTime - now) / 1000);
-    return { success: false, remaining: 0, resetIn };
-  }
+    // 3. Aylık limit kontrolü
+    const monthlyResult = await monthlyLimit.limit(userId);
+    if (!monthlyResult.success) {
+      return {
+        success: false,
+        remaining: monthlyResult.remaining,
+        resetIn: Math.ceil((monthlyResult.reset - Date.now()) / 1000),
+        limitType: "monthly",
+      };
+    }
 
-  // Increment count
-  record.count++;
-  const resetIn = Math.ceil((record.resetTime - now) / 1000);
-  return { success: true, remaining: limit - record.count, resetIn };
+    // Tüm limitler OK
+    return {
+      success: true,
+      remaining: Math.min(
+        minuteResult.remaining,
+        dailyResult.remaining,
+        monthlyResult.remaining
+      ),
+      resetIn: 0,
+    };
+  } catch (error) {
+    console.error("Rate limit error:", error);
+    // Redis hatası durumunda izin ver (fail-open)
+    return { success: true, remaining: 999, resetIn: 0 };
+  }
 }
 
+// Kullanım durumunu kontrol et (UI için)
+export async function getRateLimitStatus(userId: string): Promise<{
+  minute: { remaining: number; limit: number };
+  daily: { remaining: number; limit: number };
+  monthly: { remaining: number; limit: number };
+}> {
+  try {
+    const [minuteResult, dailyResult, monthlyResult] = await Promise.all([
+      minuteLimit.getRemaining(userId),
+      dailyLimit.getRemaining(userId),
+      monthlyLimit.getRemaining(userId),
+    ]);
+
+    return {
+      minute: { remaining: minuteResult, limit: 10 },
+      daily: { remaining: dailyResult, limit: 100 },
+      monthly: { remaining: monthlyResult, limit: 1000 },
+    };
+  } catch (error) {
+    console.error("Get rate limit status error:", error);
+    return {
+      minute: { remaining: 10, limit: 10 },
+      daily: { remaining: 100, limit: 100 },
+      monthly: { remaining: 1000, limit: 1000 },
+    };
+  }
+}

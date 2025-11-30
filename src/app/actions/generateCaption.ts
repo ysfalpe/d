@@ -29,10 +29,15 @@ export async function generateCaptionAction(imageBase64: string, options: Genera
     throw new Error('Not authenticated');
   }
 
-  // Rate limiting (kullanıcı başına dakikada 10 istek)
-  const rateLimitResult = rateLimit(userId, 10, 60000);
+  // Rate limiting (Redis tabanlı - dakika/gün/ay limitleri)
+  const rateLimitResult = await rateLimit(userId);
   if (!rateLimitResult.success) {
-    throw new Error(`Too many requests. Please wait ${rateLimitResult.resetIn} seconds.`);
+    const limitMessages: Record<string, string> = {
+      minute: `Too many requests. Please wait ${rateLimitResult.resetIn} seconds.`,
+      daily: `Daily limit reached (100/day). Resets in ${Math.ceil(rateLimitResult.resetIn / 3600)} hours.`,
+      monthly: `Monthly limit reached (1000/month). Please upgrade to Pro for unlimited access.`,
+    };
+    throw new Error(limitMessages[rateLimitResult.limitType || 'minute']);
   }
 
   // Image size kontrolü (max 5MB base64 = ~6.6MB string)
