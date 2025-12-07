@@ -19,7 +19,6 @@ export const Footer = () => {
                         <div className={styles.column}>
                             <h4>Resources</h4>
                             <a href="mailto:ifytech77@gmail.com">Contact</a>
-                            <a href="https://github.com/ysfalpe/d" target="_blank" rel="noopener noreferrer">GitHub</a>
                         </div>
                         <div className={styles.column}>
                             <h4>Legal</h4>
