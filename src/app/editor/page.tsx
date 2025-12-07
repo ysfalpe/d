@@ -1,0 +1,398 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { toPng } from 'html-to-image';
+import { Header } from '@/components/layout/Header';
+import { EditorSidebar } from '@/components/editor/EditorSidebar';
+import { PreviewCanvas } from '@/components/editor/PreviewCanvas';
+import { UpgradeModal } from '@/components/modals/UpgradeModal';
+import styles from './page.module.css';
+import { Screenshot, CaptionData } from './types';
+import { generateCaptionAction, AIResponse } from '../actions/generateCaption';
+import { checkCredits } from '../actions/user';
+
+const GRADIENTS_BY_VIBE: Record<string, string[]> = {
+    'Professional & Trustworthy': [
+        'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+        'linear-gradient(135deg, #0f172a 0%, #334155 100%)',
+        'linear-gradient(135deg, #0e7490 0%, #22d3ee 100%)',
+    ],
+    'Exciting & Energetic': [
+        'linear-gradient(135deg, #dc2626 0%, #f97316 100%)',
+        'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)',
+        'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+    ],
+    'Friendly & Casual': [
+        'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)',
+        'linear-gradient(135deg, #f472b6 0%, #fb7185 100%)',
+        'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+    ],
+    'Minimalist & Clean': [
+        'linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%)',
+        'linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%)',
+        'linear-gradient(135deg, #475569 0%, #1e293b 100%)',
+    ],
+    'Luxurious & Elegant': [
+        'linear-gradient(135deg, #000000 0%, #434343 100%)',
+        'linear-gradient(135deg, #4a044e 0%, #701a75 100%)',
+        'linear-gradient(135deg, #1f2937 0%, #111827 100%)',
+    ],
+};
+
+export default function EditorPage() {
+    const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
+    const [isGlobalGenerating, setIsGlobalGenerating] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
+
+    const [appName, setAppName] = useState('');
+    const [description, setDescription] = useState('');
+    const [tone, setTone] = useState('Professional & Trustworthy');
+    const [appIcon, setAppIcon] = useState<File | null>(null);
+    const [language, setLanguage] = useState('English');
+    const [backgroundColor, setBackgroundColor] = useState('#667eea');
+
+    // URL params (checkout success kontrolü)
+    const searchParams = useSearchParams();
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+    // Credit state
+    const [credits, setCredits] = useState<number | null>(null); // null = loading
+    const [isPro, setIsPro] = useState(false);
+    const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+    const [creditsLoading, setCreditsLoading] = useState(true);
+
+    // İlk yüklemede credit durumunu kontrol et
+    const refreshCredits = async () => {
+        try {
+            setCreditsLoading(true);
+            const result = await checkCredits();
+            setCredits(result.credits);
+            setIsPro(result.isPro);
+            return result;
+        } catch (e) {
+            console.error('Failed to load credits:', e);
+            setCredits(0);
+            return null;
+        } finally {
+            setCreditsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        refreshCredits();
+
+        // Checkout'tan başarılı dönüş kontrolü
+        if (searchParams.get('success') === 'true') {
+            setShowSuccessMessage(true);
+            // URL'den success parametresini temizle
+            window.history.replaceState({}, '', '/editor');
+
+            // Kredileri birkaç kez yenile (webhook gecikebilir)
+            const retryRefresh = async () => {
+                for (let i = 0; i < 5; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 2000)); // 2sn bekle
+                    const result = await refreshCredits();
+                    if (result?.isPro) break; // Pro olduysa dur
+                }
+            };
+            retryRefresh();
+        }
+    }, [searchParams]);
+
+    const fileToDataUrl = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const handleUpload = async (files: File[]) => {
+        const newScreenshots: Screenshot[] = await Promise.all(
+            files.map(async (file) => {
+                const imageDataUrl = await fileToDataUrl(file);
+                return {
+                    id: Math.random().toString(36).substring(7),
+                    type: 'screenshot' as const,
+                    file,
+                    imageDataUrl,
+                    caption: {
+                        text: '',
+                        highlight: '',
+                        icon: 'sparkles',
+                        color: '#ffffff'
+                    },
+                    background: backgroundColor,
+                    layout: 'text-top' as const,
+                    font: 'Inter',
+                    isGenerating: false
+                };
+            })
+        );
+        setScreenshots(prev => [...prev, ...newScreenshots]);
+    };
+
+    const compressImage = async (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 800;
+                const scaleSize = MAX_WIDTH / img.width;
+
+                if (scaleSize < 1) {
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = img.height * scaleSize;
+                } else {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                }
+
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    reject(new Error('Canvas context error'));
+                    return;
+                }
+
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                resolve(compressedBase64);
+            };
+            img.onerror = (err) => reject(err);
+        });
+    };
+
+    const handleGenerateAI = async () => {
+        if (screenshots.length === 0) return;
+
+        // Kredi kontrolü (Pro değilse ve yeterli kredi yoksa) - TEMPORARY BYPASS
+        // if (!isPro && (credits === null || credits < screenshots.length)) {
+        //     setShowUpgradeModal(true);
+        //     return;
+        // }
+
+        setIsGlobalGenerating(true);
+
+        const gradients = GRADIENTS_BY_VIBE[tone] || GRADIENTS_BY_VIBE['Professional & Trustworthy'];
+        const optimisticScreenshots = screenshots.map(shot => ({
+            ...shot,
+            isGenerating: true,
+            background: gradients[Math.floor(Math.random() * gradients.length)]
+        }));
+        setScreenshots(optimisticScreenshots);
+
+        let lastCredits = credits;
+
+        const promises = optimisticScreenshots.map(async (shot) => {
+            try {
+                // Handle Cover Slide
+                if (shot.type === 'cover') {
+                    // For cover, we don't have an image. We just generate a catchy slogan based on app info.
+                    // We can reuse the generateCaptionAction but pass a placeholder or modify it to accept no image.
+                    // For now, let's just simulate a "Slogan Generation" by calling the same action with a dummy 1x1 pixel image
+                    // or better, let's just skip AI for cover for now and set a default if empty, 
+                    // OR use the description to generate a slogan.
+
+                    // Let's use a simple placeholder logic for now to avoid complex AI changes for text-only
+                    // In a real scenario, we'd have a separate 'generateSlogan' action.
+                    return {
+                        ...shot,
+                        caption: {
+                            text: appName || "Your App Name",
+                            highlight: "App",
+                            icon: "star",
+                            color: "#fbbf24"
+                        },
+                        isGenerating: false
+                    };
+                }
+
+                // Handle Screenshot Slide
+                if (!shot.file) throw new Error('No file for screenshot');
+
+                const base64 = await compressImage(shot.file);
+
+                const aiData: AIResponse = await generateCaptionAction(base64, {
+                    appName,
+                    description,
+                    tone,
+                    language
+                });
+
+                // Kalan kredileri güncelle
+                if (aiData.creditsRemaining !== undefined && aiData.creditsRemaining >= 0) {
+                    lastCredits = aiData.creditsRemaining;
+                }
+
+                return {
+                    ...shot,
+                    caption: {
+                        text: aiData.headline,
+                        highlight: aiData.highlight,
+                        icon: aiData.icon,
+                        color: aiData.color
+                    },
+                    isGenerating: false
+                };
+            } catch (error) {
+                console.error(`Error generating for ${shot.id}:`, error);
+
+                // Kredi hatası kontrolü
+                if (error instanceof Error && error.message.includes('credits')) {
+                    setShowUpgradeModal(true);
+                }
+
+                return {
+                    ...shot,
+                    caption: { text: "Failed", highlight: "", icon: "alert-triangle", color: "#fff" },
+                    isGenerating: false
+                };
+            }
+        });
+
+        const results = await Promise.all(promises);
+
+        setScreenshots(results);
+        // Kredileri sunucudan yeniden al (doğru değeri görmek için)
+        await refreshCredits();
+        setIsGlobalGenerating(false);
+    };
+
+    // Update only text for manual editing (complex editing would require more UI)
+    const handleCaptionChange = (id: string, newText: string) => {
+        setScreenshots(prev => prev.map(shot =>
+            shot.id === id ? { ...shot, caption: { ...shot.caption, text: newText } } : shot
+        ));
+    };
+
+    const handleExportAll = async () => {
+        if (screenshots.length === 0) return;
+        setIsExporting(true);
+
+        try {
+            for (const shot of screenshots) {
+                const element = document.getElementById(`screenshot-card-${shot.id}`);
+                if (element) {
+                    try {
+                        const dataUrl = await toPng(element, { 
+                            cacheBust: true, 
+                            pixelRatio: 2,
+                            skipFonts: true,
+                            filter: (node: HTMLElement) => {
+                                // Skip problematic elements if needed
+                                return true;
+                            }
+                        });
+                        const link = document.createElement('a');
+                        link.download = `appshot-${shot.id}.png`;
+                        link.href = dataUrl;
+                        link.click();
+                        
+                        // Small delay between downloads
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                    } catch (err) {
+                        console.error(`Failed to export ${shot.id}:`, err);
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Export failed:', error);
+            alert('Export failed. Please try again.');
+        } finally {
+            setIsExporting(false);
+        }
+    };
+
+    const handleShuffleBackground = (id: string) => {
+        const gradients = GRADIENTS_BY_VIBE[tone] || GRADIENTS_BY_VIBE['Professional & Trustworthy'];
+        const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+
+        setScreenshots(prev => prev.map(shot =>
+            shot.id === id ? { ...shot, background: randomGradient } : shot
+        ));
+    };
+
+    const handleDelete = (id: string) => {
+        setScreenshots(prev => prev.filter(shot => shot.id !== id));
+    };
+
+    const handleBackgroundChange = (color: string) => {
+        setBackgroundColor(color);
+        // Apply to all existing screenshots
+        setScreenshots(prev => prev.map(s => ({ ...s, background: color })));
+    };
+
+    const handleAddCover = () => {
+        const newCover: Screenshot = {
+            id: Math.random().toString(36).substring(7),
+            type: 'cover',
+            caption: {
+                text: appName || 'My App',
+                highlight: description || 'Your tagline here',
+                icon: 'zap',
+                color: '#fbbf24'
+            },
+            background: backgroundColor,
+            layout: 'text-top',
+            font: 'Inter',
+            isGenerating: false
+        };
+        // Add to the BEGINNING of the list
+        setScreenshots(prev => [newCover, ...prev]);
+    };
+
+    return (
+        <div className={styles.page}>
+            <Header />
+
+            {/* Success Toast */}
+            {showSuccessMessage && (
+                <div className={styles.successToast}>
+                    <span>🎉 Payment successful! Your Pro access is being activated...</span>
+                    <button onClick={() => setShowSuccessMessage(false)}>×</button>
+                </div>
+            )}
+
+            <main className={styles.main}>
+                <EditorSidebar
+                    onGenerateAI={handleGenerateAI}
+                    isGenerating={isGlobalGenerating}
+                    appName={appName}
+                    setAppName={setAppName}
+                    description={description}
+                    setDescription={setDescription}
+                    tone={tone}
+                    setTone={setTone}
+                    language={language}
+                    setLanguage={setLanguage}
+                    onExportAll={handleExportAll}
+                    isExporting={isExporting}
+                    credits={credits ?? 0}
+                    isPro={isPro}
+                    isLoadingCredits={creditsLoading}
+                    onUpgradeClick={() => setShowUpgradeModal(true)}
+                    screenshotCount={screenshots.length}
+                    backgroundColor={backgroundColor}
+                    setBackgroundColor={handleBackgroundChange}
+                    onAddCover={handleAddCover}
+                />
+                <PreviewCanvas
+                    screenshots={screenshots}
+                    onUpload={handleUpload}
+                    onCaptionChange={handleCaptionChange}
+                    onShuffleBackground={handleShuffleBackground}
+                    onDelete={handleDelete}
+                    appIcon={appIcon}
+                />
+            </main>
+
+            <UpgradeModal
+                isOpen={showUpgradeModal}
+                onClose={() => setShowUpgradeModal(false)}
+            />
+        </div>
+    );
+}

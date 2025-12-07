@@ -1,0 +1,20 @@
+# Project Rules
+
+## Environment Files Access
+- You have permission to read and edit .env, .env.local, .env.development, .env.production files
+- Help configure environment variables when needed
+- Never expose secret values in responses to the user, just confirm they are set
+
+## Project Context
+- This is a Next.js 16 project called "Shotsy"
+- Uses Clerk for authentication
+- Uses Polar.sh for payments
+- Uses Prisma with PostgreSQL
+- Uses OpenRouter API for AI (Gemini model)
+- Uses Upstash Redis for rate limiting
+
+## Code Style
+- Use TypeScript
+- Use CSS Modules for styling
+- Follow existing code patterns
+

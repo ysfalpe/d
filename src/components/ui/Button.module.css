@@ -1,0 +1,102 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+    outline: none;
+    font-family: inherit;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Variants */
+.primary {
+    background: #fff;
+    color: #000;
+}
+
+.primary:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.secondary {
+    background: #222;
+    color: #fff;
+}
+
+.secondary:hover:not(:disabled) {
+    background: #333;
+}
+
+.outline {
+    background: transparent;
+    border-color: #333;
+    color: #888;
+}
+
+.outline:hover:not(:disabled) {
+    background: #111;
+    border-color: #444;
+    color: #fff;
+}
+
+.ghost {
+    background: transparent;
+    color: #888;
+}
+
+.ghost:hover:not(:disabled) {
+    color: #fff;
+}
+
+/* Sizes */
+.sm {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    height: 32px;
+}
+
+.md {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    height: 38px;
+}
+
+.lg {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.95rem;
+    height: 44px;
+}
+
+/* Icons */
+.iconLeft {
+    margin-right: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.iconRight {
+    margin-left: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.spinner {
+    animation: spin 0.8s linear infinite;
+    margin-right: 0.4rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.fullWidth {
+    width: 100%;
+}
