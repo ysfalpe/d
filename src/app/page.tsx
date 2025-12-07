@@ -120,7 +120,7 @@ export default function Home() {
                   ))}
                   <span>4.9</span>
                 </div>
-                <span className={styles.proofDesc}>Loved by <strong>500+ indie developers</strong></span>
+                <span className={styles.proofDesc}>Trusted by <strong>indie developers worldwide</strong></span>
               </div>
             </motion.div>
           </div>

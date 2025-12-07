@@ -1344,7 +1344,7 @@ export default function BlogPostPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <h3>Stop Wasting Hours on Screenshots</h3>
-            <p>Join 500+ developers who create App Store screenshots in under 60 seconds.</p>
+            <p>Join developers who create App Store screenshots in under 60 seconds.</p>
             <Link href="/editor" className={styles.ctaButton}>
               Try Shotsy Free — No Credit Card
               <ArrowRight size={20} />
