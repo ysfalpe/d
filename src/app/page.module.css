@@ -808,17 +808,34 @@
   gap: 0.5rem;
   padding: 1rem 1.5rem;
   background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border: none;
   border-radius: 12px;
   color: white;
   font-weight: 600;
+  font-size: 1rem;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
-.planBtnPrimary:hover {
+.planBtnPrimary:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.planBtnPrimary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .guarantee {

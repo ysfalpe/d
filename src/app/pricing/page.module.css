@@ -250,9 +250,23 @@
   transition: all 0.2s;
 }
 
-.primaryBtn:hover {
+.primaryBtn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .secondaryBtn {

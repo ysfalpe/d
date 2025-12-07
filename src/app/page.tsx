@@ -1,15 +1,35 @@
 'use client';
 
-
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Zap, Crown, Play, Timer, TrendingUp, X } from "lucide-react";
+import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Zap, Crown, Play, Timer, TrendingUp, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import styles from "./page.module.css";
 import { motion } from "framer-motion";
+import { createCheckoutAction } from "@/app/actions/createCheckout";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { isSignedIn } = useAuth();
+
+  const handleProSubscribe = async () => {
+    if (!isSignedIn) {
+      // Kullanıcı giriş yapmamışsa sign-in sayfasına yönlendir
+      window.location.href = '/sign-in?redirect_url=' + encodeURIComponent('/#pricing');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await createCheckoutAction();
+    } catch (error) {
+      console.error('Checkout error:', error);
+      setIsLoading(false);
+    }
+  };
   return (
     <div className={styles.page}>
       <Header />
@@ -321,10 +341,23 @@ export default function Home() {
                 </li>
               </ul>
 
-              <Link href="/editor" className={styles.planBtnPrimary}>
-                Start 3-Day Free Trial
-                <ArrowRight size={18} />
-              </Link>
+              <button 
+                onClick={handleProSubscribe} 
+                className={styles.planBtnPrimary}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 size={18} className={styles.spinning} />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    Start 3-Day Free Trial
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
 
               <p className={styles.guarantee}>✓ Cancel anytime • 7-day money-back guarantee</p>
             </motion.div>

@@ -1,13 +1,33 @@
 'use client';
 
-import { Check, Zap, Crown, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Check, Zap, Crown, ArrowRight, Loader2 } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { createCheckoutAction } from '@/app/actions/createCheckout';
+import { useAuth } from '@clerk/nextjs';
 
 export default function PricingPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { isSignedIn } = useAuth();
+
+  const handleProSubscribe = async () => {
+    if (!isSignedIn) {
+      window.location.href = '/sign-in?redirect_url=' + encodeURIComponent('/pricing');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await createCheckoutAction();
+    } catch (error) {
+      console.error('Checkout error:', error);
+      setIsLoading(false);
+    }
+  };
   return (
     <div className={styles.page}>
       <Header />
@@ -127,10 +147,23 @@ export default function PricingPage() {
                 </li>
               </ul>
 
-              <Link href="/editor" className={styles.primaryBtn}>
-                Start 3-Day Free Trial
-                <ArrowRight size={18} />
-              </Link>
+              <button 
+                onClick={handleProSubscribe} 
+                className={styles.primaryBtn}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 size={18} className={styles.spinning} />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    Start 3-Day Free Trial
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
 
               <p className={styles.guarantee}>✓ Cancel anytime during trial • 7-day money-back guarantee</p>
             </motion.div>
