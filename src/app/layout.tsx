@@ -24,15 +24,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shotsy - Create Stunning App Store Screenshots",
     description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
-    url: "https://d-sigma-five.vercel.app",
+    url: "https://shotsy.org",
     siteName: "Shotsy",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "https://shotsy.org/twitterimage.png",
+        width: 1200,
+        height: 628,
+        alt: "Shotsy - AI App Store Screenshot Generator",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Shotsy - Create Stunning App Store Screenshots",
     description: "Generate professional App Store and Play Store screenshots in seconds with AI.",
+    images: ["https://shotsy.org/twitterimage.png"],
+    creator: "@shotsy",
+    site: "@shotsy",
   },
   robots: {
     index: true,
