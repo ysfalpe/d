@@ -89,11 +89,14 @@ export default function Home() {
               </div>
 
               <div className={styles.ctaGroup}>
-                <Link href="/editor">
-                  <Button size="lg" rightIcon={<ArrowRight size={20} />}>
-                    Start Free Trial
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  rightIcon={isLoading ? <Loader2 size={20} className={styles.spinning} /> : <ArrowRight size={20} />}
+                  onClick={handleProSubscribe}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Processing...' : 'Start Free Trial'}
+                </Button>
                 <a href="#how-it-works" className={styles.watchDemo}>
                   <Play size={18} fill="currentColor" />
                   <span>See How It Works</span>
