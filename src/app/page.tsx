@@ -14,12 +14,17 @@ import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
 
   const handleProSubscribe = async () => {
+    // Clerk henüz yüklenmediyse bekle
+    if (!isLoaded) {
+      return;
+    }
+    
     if (!isSignedIn) {
       // Kullanıcı giriş yapmamışsa sign-in sayfasına yönlendir
-      window.location.href = '/sign-in?redirect_url=' + encodeURIComponent('/#pricing');
+      window.location.href = '/sign-in?redirect_url=' + encodeURIComponent(window.location.origin + '/editor');
       return;
     }
 
