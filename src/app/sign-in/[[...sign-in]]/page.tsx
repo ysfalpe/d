@@ -7,12 +7,6 @@ export default function SignInPage() {
   return (
     <div className={styles.container}>
       <SignIn 
-        appearance={{
-          elements: {
-            rootBox: styles.signInBox,
-            card: styles.card,
-          }
-        }}
         afterSignInUrl="/editor"
         redirectUrl="/editor"
       />
