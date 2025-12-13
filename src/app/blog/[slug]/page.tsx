@@ -1196,7 +1196,7 @@ The apps that win aren't the ones with the best code. They're the ones that comm
     category: 'Guide',
     tags: ['app store review', 'rejection', 'design guidelines', 'ios'],
     readingTime: '8 min read',
-    content: \`
+    content: `
 ## The "Rejection" Email Every Developer Dreads
 
 It's 2 AM. You've spent months coding. You finally submit your app to the App Store.
@@ -1295,7 +1295,7 @@ The easiest way to avoid these issues is to use a screenshot tool that knows the
 Don't let a bad screenshot delay your launch.
 
 [Create compliant screenshots now →](/editor)
-    \`,
+    `,
   },
   'psychology-of-color-app-screenshots': {
     title: 'The Psychology of Color in App Icons and Screenshots',
@@ -1305,7 +1305,7 @@ Don't let a bad screenshot delay your launch.
     category: 'Design',
     tags: ['color psychology', 'design', 'conversion', 'marketing'],
     readingTime: '10 min read',
-    content: \`
+    content: `
 ## Your Users Judge You in 50 Milliseconds
 
 That's how long it takes for a user to form a first impression of your app.
@@ -1415,7 +1415,7 @@ You don't need to be an artist. You just need to be intentional. Ask yourself: "
 Then pick the color that matches that feeling.
 
 [Experiment with color palettes in Shotsy →](/editor)
-    \`,
+    `,
   },
   'localize-app-store-screenshots-growth': {
     title: 'How to Localize Your App Store Screenshots for 2x Downloads',
@@ -1425,7 +1425,7 @@ Then pick the color that matches that feeling.
     category: 'Growth',
     tags: ['localization', 'growth', 'global markets', 'translation'],
     readingTime: '9 min read',
-    content: \`
+    content: `
 ## The "English-Only" Ceiling
 
 You launch your app. You get some downloads in the US, UK, and Canada. Then... growth flatlines.
@@ -1530,7 +1530,7 @@ It's not a coding problem. It's a marketing problem. And it's one you can solve 
 Stop leaving money on the table. Speak your users' language.
 
 [Start localizing with Shotsy →](/editor)
-    \`,
+    `,
   },
 };
 
