@@ -31,7 +31,7 @@ export async function getUserSubscription() {
             id: userId,
             email,
             isPro: false,
-            credits: 0
+            credits: 3
         }
     });
     return { isPro: false, credits: 0 };

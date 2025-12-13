@@ -81,9 +81,9 @@ export default function PricingPage() {
                   <Check size={18} className={styles.checkIcon} />
                   <span>Upload screenshots</span>
                 </li>
-                <li className={styles.featureDisabled}>
-                  <span className={styles.xIcon}>×</span>
-                  <span>AI caption generation</span>
+                <li>
+                  <Check size={18} className={styles.checkIcon} />
+                  <span><strong>3 Free</strong> AI generations</span>
                 </li>
                 <li className={styles.featureDisabled}>
                   <span className={styles.xIcon}>×</span>

@@ -53,7 +53,7 @@ export default function Home() {
               {/* Urgency Badge */}
               <div className={styles.urgencyBadge}>
                 <Zap size={14} />
-                <span>Limited Offer: <strong>3 Days FREE</strong> Trial</span>
+                <span>Gift: <strong>3 FREE Credits</strong> on sign up</span>
               </div>
 
               {/* Pain Point → Solution */}
@@ -278,9 +278,9 @@ export default function Home() {
                   <Check size={18} className={styles.checkIcon} />
                   <span>Upload screenshots</span>
                 </li>
-                <li className={styles.featureDisabled}>
-                  <span className={styles.xIcon}>×</span>
-                  <span>AI caption generation</span>
+                <li>
+                  <Check size={18} className={styles.checkIcon} />
+                  <span><strong>3 Free</strong> AI generations</span>
                 </li>
                 <li className={styles.featureDisabled}>
                   <span className={styles.xIcon}>×</span>
