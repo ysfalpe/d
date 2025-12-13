@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import styles from "./page.module.css";
 import { motion } from "framer-motion";
 import { createCheckoutAction } from "@/app/actions/createCheckout";
+import { checkCredits } from "@/app/actions/user";
 import { useAuth } from "@clerk/nextjs";
 
 export default function Home() {
@@ -24,6 +25,16 @@ export default function Home() {
 
     setIsLoading(true);
     try {
+      // Önce kullanıcının premium olup olmadığını kontrol et
+      const status = await checkCredits();
+      
+      if (status.isPro) {
+        // Premium kullanıcıysa direkt editöre yönlendir
+        window.location.href = '/editor';
+        return;
+      }
+      
+      // Premium değilse checkout'a yönlendir
       await createCheckoutAction();
     } catch (error) {
       console.error('Checkout error:', error);
