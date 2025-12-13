@@ -470,6 +470,40 @@
   transform: translateY(-3px);
 }
 
+/* Story Card - Honest Section */
+.storyCard {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.storyCard p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.storyCard p:last-child {
+  margin-bottom: 0;
+}
+
+.storyCard strong {
+  color: var(--text-primary);
+}
+
+.storyNote {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.95rem !important;
+  color: var(--text-muted) !important;
+}
+
 .stars {
   display: flex;
   gap: 2px;

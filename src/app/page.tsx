@@ -53,7 +53,7 @@ export default function Home() {
               {/* Urgency Badge */}
               <div className={styles.urgencyBadge}>
                 <Zap size={14} />
-                <span>Gift: <strong>3 FREE Credits</strong> on sign up</span>
+                <span>Limited Offer: <strong>3 Days FREE</strong> Trial</span>
               </div>
 
               {/* Pain Point → Solution */}
@@ -112,15 +112,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Social Proof Bar */}
+              {/* Honest Badge */}
               <div className={styles.socialProof}>
-                <div className={styles.proofStars}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />
-                  ))}
-                  <span>4.9</span>
-                </div>
-                <span className={styles.proofDesc}>Trusted by <strong>indie developers worldwide</strong></span>
+                <span className={styles.proofDesc}>🛠️ Built by an indie dev, for indie devs</span>
               </div>
             </motion.div>
           </div>
@@ -158,32 +152,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Why We Built This Section */}
         <section className={styles.testimonials}>
           <div className={styles.sectionHeader}>
-            <h2>Loved by App Developers</h2>
-            <p>See what creators are saying about Shotsy</p>
+            <h2>Why We Built This</h2>
+            <p>A tool we needed ourselves</p>
           </div>
 
-          <div className={styles.testimonialGrid}>
-            <TestimonialCard
-              quote="Cut my screenshot creation time from 2 hours to 10 minutes. This is a game changer for indie developers."
-              author="Alex Chen"
-              role="iOS Developer"
-              rating={5}
-            />
-            <TestimonialCard
-              quote="The AI captions are surprisingly good. It understands what my app does and writes compelling copy."
-              author="Sarah Miller"
-              role="Startup Founder"
-              rating={5}
-            />
-            <TestimonialCard
-              quote="Finally, a tool that doesn't require Figma skills. Upload, generate, download. That's it."
-              author="Marcus Johnson"
-              role="Android Developer"
-              rating={5}
-            />
+          <div className={styles.storyCard}>
+            <p>
+              We spent <strong>6+ hours in Figma</strong> creating screenshots for our first app. 
+              Wrong dimensions. Blurry exports. Boring captions.
+            </p>
+            <p>
+              So we built Shotsy — the tool we wish existed. 
+              <strong> Upload, generate, download.</strong> That's it.
+            </p>
+            <p className={styles.storyNote}>
+              🚀 We're a new product, but we're shipping fast. Try it and let us know what you think.
+            </p>
           </div>
         </section>
 
@@ -278,9 +265,9 @@ export default function Home() {
                   <Check size={18} className={styles.checkIcon} />
                   <span>Upload screenshots</span>
                 </li>
-                <li>
-                  <Check size={18} className={styles.checkIcon} />
-                  <span><strong>3 Free</strong> AI generations</span>
+                <li className={styles.featureDisabled}>
+                  <span className={styles.xIcon}>×</span>
+                  <span>AI caption generation</span>
                 </li>
                 <li className={styles.featureDisabled}>
                   <span className={styles.xIcon}>×</span>
@@ -380,22 +367,3 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode, titl
   );
 }
 
-function TestimonialCard({ quote, author, role, rating }: { quote: string, author: string, role: string, rating: number }) {
-  return (
-    <div className={styles.testimonialCard}>
-      <div className={styles.stars}>
-        {[...Array(rating)].map((_, i) => (
-          <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />
-        ))}
-      </div>
-      <p className={styles.quote}>&ldquo;{quote}&rdquo;</p>
-      <div className={styles.author}>
-        <div className={styles.avatar}>{author.charAt(0)}</div>
-        <div>
-          <strong>{author}</strong>
-          <span>{role}</span>
-        </div>
-      </div>
-    </div>
-  );
-}

@@ -81,9 +81,9 @@ export default function PricingPage() {
                   <Check size={18} className={styles.checkIcon} />
                   <span>Upload screenshots</span>
                 </li>
-                <li>
-                  <Check size={18} className={styles.checkIcon} />
-                  <span><strong>3 Free</strong> AI generations</span>
+                <li className={styles.featureDisabled}>
+                  <span className={styles.xIcon}>×</span>
+                  <span>AI caption generation</span>
                 </li>
                 <li className={styles.featureDisabled}>
                   <span className={styles.xIcon}>×</span>
@@ -159,8 +159,8 @@ export default function PricingPage() {
                   </>
                 ) : (
                   <>
-                    Start 3-Day Free Trial
-                    <ArrowRight size={18} />
+                Start 3-Day Free Trial
+                <ArrowRight size={18} />
                   </>
                 )}
               </button>
