@@ -189,9 +189,9 @@ Quick math that changed my perspective:
 - **Time spent in Figma making screenshots:** 4 hours minimum
 - **Cost of using Figma "for free":** $300 in lost development time
 
-- **Shotsy subscription:** $19/month
+- **Shotsy subscription:** $5.99/month
 - **Time spent:** 10 minutes
-- **Actual cost:** $19 + $12.50 (time) = $31.50
+- **Actual cost:** $5.99 + $12.50 (time) = $18.49
 
 "Free" tools aren't free when you account for your time.
 

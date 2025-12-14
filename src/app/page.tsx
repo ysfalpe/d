@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Zap, Crown, Play, Timer, TrendingUp, X, Loader2 } from "lucide-react";
+import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Crown, Play, Timer, TrendingUp, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -254,51 +254,6 @@ export default function Home() {
           </div>
 
           <div className={styles.pricingGrid}>
-            {/* Free Plan */}
-            <motion.div 
-              className={styles.pricingCard}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className={styles.planHeader}>
-                <div className={styles.planIcon}>
-                  <Zap size={24} />
-                </div>
-                <h3 className={styles.planName}>Free</h3>
-                <p className={styles.planDesc}>Try before you buy</p>
-              </div>
-              
-              <div className={styles.priceContainer}>
-                <span className={styles.price}>$0</span>
-                <span className={styles.period}>/forever</span>
-              </div>
-
-              <ul className={styles.planFeatures}>
-                <li>
-                  <Check size={18} className={styles.checkIcon} />
-                  <span>View examples & templates</span>
-                </li>
-                <li>
-                  <Check size={18} className={styles.checkIcon} />
-                  <span>Upload screenshots</span>
-                </li>
-                <li className={styles.featureDisabled}>
-                  <span className={styles.xIcon}>×</span>
-                  <span>AI caption generation</span>
-                </li>
-                <li className={styles.featureDisabled}>
-                  <span className={styles.xIcon}>×</span>
-                  <span>Export high-res images</span>
-                </li>
-              </ul>
-
-              <Link href="/editor" className={styles.planBtnSecondary}>
-                Try Editor
-              </Link>
-            </motion.div>
-
             {/* Pro Plan */}
             <motion.div 
               className={`${styles.pricingCard} ${styles.proCard}`}
@@ -318,11 +273,9 @@ export default function Home() {
               </div>
               
               <div className={styles.priceContainer}>
-                <span className={styles.originalPrice}>$49</span>
-                <span className={styles.price}>$19</span>
+                <span className={styles.price}>$5.99</span>
                 <span className={styles.period}>/month</span>
               </div>
-              <div className={styles.savingsBadge}>Save 61% - Limited Time</div>
 
               <ul className={styles.planFeatures}>
                 <li>

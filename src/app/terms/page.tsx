@@ -41,7 +41,7 @@ export default function TermsPage() {
           <section className={styles.section}>
             <h2>4. Subscription and Payments</h2>
             <ul>
-              <li>Pro subscriptions are billed monthly at $19/month</li>
+              <li>Pro subscriptions are billed monthly at $5.99/month</li>
               <li>Payments are processed securely through Polar</li>
               <li>You can cancel your subscription at any time</li>
               <li>Refunds are available within 7 days of purchase</li>
