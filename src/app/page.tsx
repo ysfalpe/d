@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Crown, Play, Timer, TrendingUp, X, Loader2 } from "lucide-react";
+import { ArrowRight, Wand2, Layout, Download, Smartphone, Upload, Sparkles, Image, Star, Users, Clock, Shield, Check, Crown, Play, Timer, TrendingUp, X, Loader2, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
