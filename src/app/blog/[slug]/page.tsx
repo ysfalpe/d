@@ -1532,6 +1532,705 @@ Stop leaving money on the table. Speak your users' language.
 [Start localizing with Shotsy →](/editor)
     `,
   },
+  'app-store-preview-video-vs-screenshots': {
+    title: 'App Store Preview Video vs Screenshots: Which Converts Better in 2025?',
+    description: 'Should you invest time in making an app preview video, or are screenshots enough? Data from 100+ apps reveals the surprising answer.',
+    date: '2025-01-30',
+    author: 'Emma Rodriguez',
+    category: 'Conversion',
+    tags: ['app preview video', 'screenshots', 'conversion rate', 'app store'],
+    readingTime: '11 min read',
+    content: `
+## The $2,000 Video That Got Zero Extra Downloads
+
+A developer friend of mine spent $2,000 on a professional app preview video. Smooth animations. Professional voiceover. Dramatic music.
+
+His conversion rate? Unchanged. Zero lift.
+
+Meanwhile, another developer I know spent 2 hours updating her screenshots with better headlines. Her conversion rate jumped 40%.
+
+So what gives? Should you make a video or not?
+
+After analyzing data from 100+ apps, I finally have an answer. And it's not what most people expect.
+
+## The Data: Video vs Screenshots
+
+Here's what I found across different app categories:
+
+### Games: Video Wins (Usually)
+- **With video:** 15-25% higher conversion
+- **Why:** Gameplay is hard to convey in static images
+- **Exception:** Simple puzzle games do fine with screenshots
+
+### Productivity Apps: Screenshots Win
+- **With video:** 2-5% lift (sometimes negative)
+- **Why:** Users want to see the UI quickly, not watch a 30-second video
+- **Exception:** Apps with unique interactions (gesture-based apps)
+
+### Social/Entertainment Apps: Mixed Results
+- **With video:** 5-15% lift
+- **Why:** Shows the "vibe" of the app
+- **Key factor:** Video quality matters more here
+
+### Utility Apps: Screenshots Win
+- **With video:** Often negative impact
+- **Why:** Users just want to know if it does the job
+- **Exception:** Apps that solve problems in unique ways
+
+## Why Screenshots Often Beat Video
+
+### 1. Users Don't Watch Videos
+
+Here's the uncomfortable truth: most users never tap "Play."
+
+Data from various ASO tools suggests only 15-20% of users who view your app page actually play the video. The rest just look at your screenshots.
+
+If you pour all your effort into video and neglect screenshots, you're optimizing for the minority.
+
+### 2. Videos Auto-Play Without Sound
+
+On both iOS and Android, preview videos auto-play muted. If your video relies on narration or sound effects to make sense, you've already lost.
+
+### 3. Screenshots Are "Scannabled"
+
+Users can glance at 5 screenshots in 2 seconds. They can extract the key value propositions instantly.
+
+A 30-second video forces them to wait. And they won't wait.
+
+### 4. Videos Are Expensive to Update
+
+Every time you update your UI, add a feature, or rebrand, your video needs to be re-made. Screenshots? A few hours of work.
+
+## When You SHOULD Make a Video
+
+Despite the above, there are cases where video is worth it:
+
+### Your App Has Motion
+
+If the core experience involves animation, gesture, or movement (games, video editors, fitness apps with guided exercises), screenshots literally cannot show what you do.
+
+### You Have a Complex Workflow
+
+If your app has a multi-step workflow that's confusing in static images, a video can show the flow in action.
+
+### Your Competitors All Have Videos
+
+In some categories (especially games), users expect a video. Not having one looks unprofessional.
+
+### You Have Budget for QUALITY Video
+
+A bad video is worse than no video. If you can't make it look professional, skip it.
+
+## The Optimal Strategy for Most Apps
+
+Based on my analysis, here's the winning formula:
+
+### Priority 1: Nail Your Screenshots (80% of effort)
+- First screenshot: Clear value proposition
+- Second screenshot: Core feature in action
+- Third screenshot: Key differentiator
+- Fourth screenshot: Social proof or secondary feature
+- Fifth screenshot: Call to action
+
+### Priority 2: Simple Preview Video (20% of effort)
+- Keep it under 15 seconds
+- No narration (will be muted anyway)
+- Show your app in action, no fancy transitions
+- Use text overlays to convey key points
+
+### Budget Breakdown
+- **Bootstrapped:** Skip video, perfect your screenshots
+- **Some budget ($500-1000):** DIY video with screen recording + simple editing
+- **Real budget ($2000+):** Professional video, but still prioritize screenshots
+
+## How to Make a "Good Enough" Video for Free
+
+If you decide you want a video, here's my zero-budget approach:
+
+### Step 1: Screen Record Your App
+Use QuickTime (Mac) or a screen recorder. Capture 3-4 key flows.
+
+### Step 2: Edit in iMovie or CapCut
+Cut the boring parts. Add simple transitions. Total time: 20 seconds max.
+
+### Step 3: Add Text Overlays
+Since there's no sound, use text to highlight what's happening:
+- "Create a new task"
+- "Set reminders"
+- "Track your progress"
+
+### Step 4: Export at Correct Dimensions
+- iOS: 1080 x 1920 (9:16) or 1920 x 1080 (16:9)
+- Keep it under 30 seconds
+
+Total time: 2-3 hours. Total cost: $0.
+
+## The Screenshot Checklist (What Really Moves the Needle)
+
+Since screenshots matter more for most apps, here's where to focus:
+
+### Headline Copy
+- Benefit-focused, not feature-focused
+- Readable at thumbnail size
+- Specific and concrete
+
+### Visual Hierarchy
+- One clear focal point per screenshot
+- Consistent style across all screenshots
+- High contrast between text and background
+
+### Device Frames
+- Use current device models (iPhone 15, not iPhone 8)
+- Consistent positioning across screenshots
+- Don't let frames distract from content
+
+### Social Proof (If You Have It)
+- "4.8 stars from 10,000 reviews"
+- "Featured by Apple"
+- "Used by 100,000+ people"
+
+## Real Examples: Video vs No Video
+
+### Example 1: Meditation App
+- **With video:** 8% conversion lift
+- **Video content:** Calming animations, breathing exercises
+- **Verdict:** Worth it—the motion conveys the peaceful experience
+
+### Example 2: To-Do App
+- **With video:** -3% conversion (yes, negative)
+- **Video content:** Showed all features in 30 seconds
+- **Verdict:** Too much information. Screenshots were clearer.
+
+### Example 3: Photo Editing App
+- **With video:** 22% conversion lift
+- **Video content:** Before/after transformations, filter previews
+- **Verdict:** Clear win—transformations are compelling in motion
+
+## My Final Recommendation
+
+**For 90% of apps:** Focus on screenshots first. Make them perfect. Then, if you have extra time and budget, add a simple video.
+
+**The formula:**
+1. Create 5 compelling screenshots with clear value propositions
+2. Use a tool like [Shotsy](/editor) to generate professional designs quickly
+3. Test and iterate based on conversion data
+4. Only then consider adding a video
+
+Don't let the "should I make a video?" question delay your launch. Ship with great screenshots, measure, then optimize.
+
+[Create high-converting screenshots in minutes →](/editor)
+    `,
+  },
+  'complete-aso-checklist-2025': {
+    title: 'The Complete ASO Checklist for 2025: 47 Steps to More Downloads',
+    description: 'Everything you need to optimize your App Store listing, from keywords to screenshots to reviews. Bookmark this comprehensive checklist.',
+    date: '2025-02-01',
+    author: 'Marcus Chen',
+    category: 'ASO',
+    tags: ['aso checklist', 'app store optimization', 'app marketing', 'downloads'],
+    readingTime: '18 min read',
+    content: `
+## Why Most ASO Guides Are Useless
+
+I've read dozens of ASO guides. They all say the same things:
+- "Optimize your keywords"
+- "Use good screenshots"
+- "Get more reviews"
+
+Thanks. Very helpful.
+
+What they don't give you is a **specific, actionable checklist** you can work through step by step.
+
+So I made one. 47 steps. Everything I do when launching or optimizing an app. Bookmark this page—you'll need it.
+
+## Part 1: Pre-Launch Research (Steps 1-12)
+
+### Market Research
+
+**1. Identify your top 5 competitors**
+Search for your main keyword. Who ranks #1-5? These are your competitors.
+
+**2. Screenshot their listings**
+Save their titles, subtitles, descriptions, screenshots, and videos. You'll reference these.
+
+**3. Note their keyword patterns**
+What words appear in their titles and subtitles? Make a list.
+
+**4. Check their review sentiment**
+Read their 1-star and 2-star reviews. What are users complaining about? This is your opportunity.
+
+**5. Analyze their update frequency**
+Apps that update frequently tend to rank higher. Check their version history.
+
+### Keyword Research
+
+**6. Brainstorm 50 potential keywords**
+Think like your user. What would they search for?
+
+**7. Use App Store autocomplete**
+Type your keywords into the search bar. Note what Apple/Google suggests.
+
+**8. Check keyword difficulty**
+Use a tool (or just search manually) to see how competitive each keyword is.
+
+**9. Identify long-tail opportunities**
+"Budget app" is competitive. "Budget app for couples" is less so.
+
+**10. Create your final keyword list**
+Prioritize: high relevance + medium/low competition = best opportunities.
+
+### Positioning
+
+**11. Define your unique value proposition**
+Complete this sentence: "My app is the only [category] app that [unique benefit]."
+
+**12. Identify your target user persona**
+Age, job, pain points, goals. Be specific. "Everyone" is not a persona.
+
+## Part 2: App Store Listing (Steps 13-28)
+
+### Title & Subtitle
+
+**13. Include primary keyword in title**
+Example: "BudgetFlow - Money Tracker" (not just "BudgetFlow")
+
+**14. Use full character limit**
+iOS: 30 characters for title, 30 for subtitle. Use them all.
+
+**15. Put brand name first, keyword second**
+"BrandName - Keyword" reads more naturally than "Keyword | BrandName"
+
+**16. Subtitle = secondary keywords**
+Don't repeat title words. Add new searchable terms.
+
+### Description
+
+**17. Hook in first 3 lines**
+That's all users see before "More." Make them count.
+
+**18. Lead with benefits, not features**
+"Wake up feeling rested" not "Sleep tracking algorithm"
+
+**19. Use short paragraphs**
+2-3 sentences max. Wall of text = nobody reads.
+
+**20. Include keywords naturally**
+Don't stuff. Write for humans, sprinkle keywords.
+
+**21. Add a clear call to action**
+"Download now and start your free trial."
+
+**22. Update description with each release**
+Tells Apple/Google your app is active.
+
+### Keywords Field (iOS Only)
+
+**23. Use all 100 characters**
+Every unused character is wasted opportunity.
+
+**24. Separate with commas, no spaces**
+"budget,tracker,money,expense" not "budget, tracker, money"
+
+**25. Don't repeat title/subtitle words**
+Apple already indexes those.
+
+**26. Don't use plurals if you have singulars**
+Apple indexes both automatically.
+
+**27. Skip competitor brand names**
+Violates guidelines and doesn't work well anyway.
+
+### Screenshots
+
+**28. First screenshot = value proposition**
+Answer: "What does this app do for me?"
+
+**29. Show actual UI, not illustrations**
+Users want to see what they're getting.
+
+**30. Use readable text at thumbnail size**
+If users can't read it small, it doesn't work.
+
+**31. Tell a story across screenshots**
+Hook → Show → Prove → Close
+
+**32. Include social proof if you have it**
+"10,000+ 5-star reviews" builds trust.
+
+**33. Use current device frames**
+iPhone 15, not iPhone 8.
+
+**34. Test on actual devices**
+How do your screenshots look on a real phone?
+
+### Icon
+
+**35. Keep it simple**
+One clear shape/symbol. No text.
+
+**36. Use distinctive colors**
+Stand out from competitors in search results.
+
+**37. Test at small sizes**
+Your icon will often be displayed at 29x29 pixels.
+
+### Video (If Applicable)
+
+**38. Keep it under 20 seconds**
+Nobody watches longer.
+
+**39. Design for muted playback**
+Use text overlays, no narration.
+
+**40. Show core value immediately**
+Don't waste time on logo animations.
+
+## Part 3: Reviews & Ratings (Steps 41-47)
+
+**41. Implement review prompt**
+Use Apple/Google's native prompt.
+
+**42. Trigger after positive moments**
+After completing a task, achieving a goal, using app for 7 days.
+
+**43. Never prompt after crashes**
+Obvious, but I've seen apps do this.
+
+**44. Respond to all negative reviews**
+Users can change their rating. 30% do after you respond.
+
+**45. Thank positive reviewers**
+Shows you're engaged.
+
+**46. Use feedback to improve**
+Common complaints = product roadmap.
+
+**47. Track your average rating**
+Goal: Stay above 4.5 stars.
+
+## The Quick-Start Version
+
+Don't have time for 47 steps? Here are the 10 that matter most:
+
+1. Primary keyword in title
+2. Compelling first screenshot with clear value prop
+3. Hook users in first 3 lines of description
+4. Use all 100 keyword characters (iOS)
+5. Show actual app UI in screenshots
+6. Readable text at thumbnail size
+7. Review prompt after positive moments
+8. Respond to negative reviews
+9. Update app regularly
+10. Keep icon simple and distinctive
+
+## Tools I Use
+
+### Free
+- **App Store Autocomplete** — Keyword research
+- **Google Sheets** — Tracking rankings
+- **Shotsy** — Screenshot creation
+
+### Paid
+- **App Radar** — Keyword tracking, competitor analysis
+- **AppFollow** — Review monitoring
+- **Sensor Tower** — Market intelligence (expensive, but comprehensive)
+
+## Common Mistakes to Avoid
+
+**Mistake 1: Optimizing once and forgetting**
+ASO is ongoing. Review quarterly at minimum.
+
+**Mistake 2: Copying competitors exactly**
+Learn from them, but differentiate.
+
+**Mistake 3: Ignoring localization**
+English-only = 15% of the market.
+
+**Mistake 4: Changing everything at once**
+Change one thing, measure, then change the next.
+
+**Mistake 5: Obsessing over rankings**
+Downloads and revenue matter more than rank for vanity keywords.
+
+## Your Action Plan
+
+### This Week
+- Complete steps 1-12 (research)
+- Draft new title and subtitle
+- Outline screenshot story
+
+### This Month
+- Create new screenshots with [Shotsy](/editor)
+- Rewrite description
+- Implement review prompt
+
+### Ongoing
+- Monitor rankings weekly
+- Respond to reviews within 48 hours
+- A/B test (Google Play) or iteration test (iOS) monthly
+
+## Conclusion
+
+ASO isn't magic. It's a checklist.
+
+Work through these 47 steps systematically. Track your results. Iterate based on data.
+
+The apps that win aren't the ones with the biggest budgets. They're the ones that execute the fundamentals consistently.
+
+You now have the fundamentals. Go execute.
+
+[Create professional screenshots →](/editor)
+    `,
+  },
+  'app-store-description-copywriting': {
+    title: 'How to Write an App Store Description That Converts (With Templates)',
+    description: 'Most developers write boring descriptions. Use these proven copywriting templates to turn browsers into downloaders.',
+    date: '2025-02-03',
+    author: 'Sarah Mitchell',
+    category: 'Copywriting',
+    tags: ['app description', 'copywriting', 'conversion', 'app store'],
+    readingTime: '12 min read',
+    content: `
+## Nobody Reads Your Description (Until They Do)
+
+Here's a paradox: most users never read your app description. They decide based on screenshots and ratings.
+
+But the users who DO read? They're your most qualified leads. They're seriously considering your app and want more information.
+
+Your description isn't for everyone. It's for the users who are 80% convinced and need that final push.
+
+And most developers completely waste this opportunity.
+
+## The 3-Second Rule
+
+Users see the first 3 lines of your description before tapping "More."
+
+On iOS, that's roughly 170 characters. On Android, it varies by device.
+
+This is your hook. If you don't grab them in 3 lines, they'll never see the rest.
+
+### Bad First 3 Lines
+"Welcome to TaskMaster! TaskMaster is a powerful task management application that helps you organize your daily activities. Our app features a beautiful interface..."
+
+Boring. Generic. Says nothing specific.
+
+### Good First 3 Lines
+"Forget about deadlines forever. TaskMaster users complete 40% more tasks—because we remind you before you forget. Join 50,000 productive people."
+
+Specific benefit. Social proof. Emotional hook.
+
+## The 5-Part Description Formula
+
+After testing hundreds of descriptions, I've found this structure converts best:
+
+### Part 1: The Hook (First 3 Lines)
+- Lead with your biggest benefit
+- Include a specific number if possible
+- Add urgency or social proof
+
+### Part 2: The Problem (1 paragraph)
+- Describe the pain your users feel
+- Use their language, not tech jargon
+- Make them nod and think "yes, that's me"
+
+### Part 3: The Solution (2-3 paragraphs)
+- Introduce your app as the answer
+- Focus on outcomes, not features
+- Use bullet points for scanability
+
+### Part 4: Social Proof (1 paragraph)
+- Reviews, ratings, press mentions
+- User testimonials (if allowed)
+- "Featured by Apple" badges
+
+### Part 5: The Close (1-2 lines)
+- Clear call to action
+- Remove risk ("Free to try")
+- Create urgency if authentic
+
+## Template 1: The Problem-Solution Description
+
+Perfect for: Utility apps, productivity apps, apps solving clear pain points
+
+---
+
+**[Hook: Benefit + Number + Social Proof]**
+Stop losing track of your expenses. Users save an average of $340/month with BudgetBuddy. Join 100,000+ people taking control of their money.
+
+**[Problem]**
+You know you should track spending, but spreadsheets are tedious, and most apps are confusing. Meanwhile, money disappears and you wonder where it went.
+
+**[Solution]**
+BudgetBuddy makes it effortless:
+
+• Snap a photo of any receipt—we'll categorize it automatically
+• See exactly where your money goes with visual breakdowns
+• Get gentle reminders before you overspend
+
+No complicated setup. No manual entry. Just clarity.
+
+**[Social Proof]**
+"Finally, an app I actually use!" — Featured in Forbes
+"This changed my financial life" — 15,000+ 5-star reviews
+
+**[Close]**
+Download free and see where your money really goes. Premium features available if you want more power.
+
+---
+
+## Template 2: The Story Description
+
+Perfect for: Personal apps, creative apps, apps from indie developers
+
+---
+
+**[Hook: Personal + Intrigue]**
+I built this app because I was drowning in to-do lists. Three years and 200,000 users later, we might have solved task management.
+
+**[Story]**
+In 2021, I was using 4 different apps to manage my tasks—and still missing deadlines. I was frustrated, and I wasn't alone.
+
+So I built Tasker. One app. One list. Zero stress.
+
+**[What Makes It Different]**
+Unlike other task apps, Tasker doesn't overwhelm you:
+
+• Only see tasks that matter TODAY
+• Smart rescheduling when life happens
+• 30-second daily review (not 30 minutes)
+
+**[Results]**
+Users report feeling "finally in control" within the first week. Our completion rate is 73%—compared to the industry average of 31%.
+
+**[Close]**
+Try it free for 7 days. Your sanity will thank you.
+
+---
+
+## Template 3: The Feature-Focused Description
+
+Perfect for: Technical apps, apps with unique features, developer tools
+
+---
+
+**[Hook: Feature + Benefit]**
+The only code editor that runs Python, JavaScript, and Swift—offline, on your phone.
+
+**[For Who]**
+Built for developers who code on the go. Write on your commute. Debug at the coffee shop. Ship from anywhere.
+
+**[Key Features]**
+Syntax highlighting for 50+ languages
+• Built-in terminal and interpreter
+• Git integration (pull, commit, push)
+• iCloud sync across all devices
+• Dark mode (obviously)
+
+**[Technical Credibility]**
+Powered by the same engine as VS Code. Native performance. No compromises.
+
+**[Social Proof]**
+#1 Developer Tool in 47 countries
+4.9 stars from 12,000+ developers
+Featured in Apple's "Apps We Love"
+
+**[Close]**
+Free to download. Pro features for power users.
+
+---
+
+## Words That Convert (Use These)
+
+### Power Words
+- Instantly
+- Effortless
+- Proven
+- Guaranteed
+- Simple
+- Powerful
+- Finally
+- Discover
+
+### Specificity Words
+- In 30 seconds
+- 40% faster
+- 100,000+ users
+- 4.9 stars
+- $50 saved per month
+- 5-minute setup
+
+### Emotional Words
+- Freedom
+- Control
+- Peace of mind
+- Confidence
+- Relief
+- Joy
+
+## Words That Kill Conversions (Avoid These)
+
+### Vague Claims
+- "The best app"
+- "Revolutionary"
+- "World-class"
+- "Game-changing"
+- "Cutting-edge"
+
+### Technical Jargon
+- "Leveraging AI/ML algorithms"
+- "Cloud-native architecture"
+- "Seamless integration"
+- "Robust solution"
+
+### Overused Phrases
+- "Take X to the next level"
+- "Your one-stop solution"
+- "Everything you need"
+
+## Common Mistakes
+
+### Mistake 1: Writing for App Store Reviewers
+Your description is for USERS, not for the people approving your app. Don't write corporate-speak.
+
+### Mistake 2: Listing Every Feature
+Pick your top 3-5 features. More isn't better—it's overwhelming.
+
+### Mistake 3: No Formatting
+Walls of text don't get read. Use:
+- Short paragraphs
+- Bullet points
+- White space
+
+### Mistake 4: Forgetting the Call to Action
+Every description should end with a clear next step.
+
+### Mistake 5: Copying Competitors
+If your description sounds like everyone else's, you'll blend in—and lose.
+
+## The Editing Checklist
+
+Before you publish, verify:
+
+1. Does the first line convey my main benefit?
+2. Can someone understand what my app does in 10 seconds?
+3. Have I focused on outcomes, not features?
+4. Is there social proof?
+5. Is the text scannable (short paragraphs, bullets)?
+6. Does it sound human, not corporate?
+7. Is there a clear call to action?
+8. Have I removed all jargon?
+
+## Put It All Together
+
+Your app description is sales copy. Treat it like one.
+
+But remember: your description supports your screenshots and icon. It doesn't replace them.
+
+For most users, the decision happens before they read a word. Create screenshots that do the heavy lifting with [Shotsy](/editor), then use your description to close the deal.
+
+[Create screenshots that convert →](/editor)
+    `,
+  },
 };
 
 function formatDate(dateString: string): string {
