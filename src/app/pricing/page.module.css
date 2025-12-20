@@ -61,15 +61,9 @@
 }
 
 .pricingGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
   gap: 2rem;
-}
-
-@media (max-width: 768px) {
-  .pricingGrid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Pricing Card */
@@ -80,6 +74,8 @@
   padding: 2rem;
   position: relative;
   transition: all 0.3s;
+  max-width: 400px;
+  width: 100%;
 }
 
 .pricingCard:hover {

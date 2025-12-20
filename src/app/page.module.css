@@ -642,8 +642,8 @@
 }
 
 .pricingGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
   gap: 2rem;
   max-width: 900px;
   margin: 0 auto;
@@ -657,6 +657,8 @@
   padding: 2.5rem;
   position: relative;
   transition: all 0.3s ease;
+  max-width: 400px;
+  width: 100%;
 }
 
 .pricingCard:hover {
@@ -935,7 +937,8 @@
   }
 
   .pricingGrid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     max-width: 450px;
   }
 
