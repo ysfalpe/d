@@ -57,7 +57,7 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose }) =
                         <span className={styles.planName}>Pro Pass</span>
                         <div className={styles.price}>
                             <span className={styles.currency}>$</span>
-                            <span className={styles.amount}>19</span>
+                            <span className={styles.amount}>5.99</span>
                             <span className={styles.period}>/mo</span>
                         </div>
                     </div>
