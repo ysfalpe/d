@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './PreviewCanvas.module.css';
 import { ImageUploader } from './ImageUploader';
 import { Screenshot } from '@/app/editor/types';
-import { RefreshCw, Trash2, Pencil, Check } from 'lucide-react';
+import { RefreshCw, Trash2, Pencil, Check, X } from 'lucide-react';
 import * as Icons from 'lucide-react';
 
 interface PreviewCanvasProps {
@@ -161,14 +161,29 @@ export const PreviewCanvas: React.FC<PreviewCanvasProps> = ({
                                                         onChange={(e) => setEditText(e.target.value)}
                                                         onKeyDown={(e) => handleKeyDown(e, shot.id)}
                                                         className={styles.editInput}
+                                                        placeholder="Enter caption text..."
                                                         autoFocus
                                                     />
-                                                    <button 
-                                                        className={styles.saveEditBtn}
-                                                        onClick={() => saveEdit(shot.id)}
-                                                    >
-                                                        <Check size={14} />
-                                                    </button>
+                                                    <div className={styles.editActions}>
+                                                        <button 
+                                                            className={styles.saveEditBtn}
+                                                            onClick={() => saveEdit(shot.id)}
+                                                            title="Save (Enter)"
+                                                        >
+                                                            <Check size={16} />
+                                                            <span>Save</span>
+                                                        </button>
+                                                        <button 
+                                                            className={styles.cancelEditBtn}
+                                                            onClick={() => {
+                                                                setEditingId(null);
+                                                                setEditText('');
+                                                            }}
+                                                            title="Cancel (Esc)"
+                                                        >
+                                                            <X size={16} />
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             ) : (
                                                 <h2 

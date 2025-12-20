@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google"; 
+import { Sora } from "next/font/google"; 
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { CookieConsent } from "@/components/ui/CookieConsent";
 import "./globals.css";
 
-const outfit = Outfit({
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -62,7 +63,7 @@ export default function RootLayout({
       signUpFallbackRedirectUrl="/#pricing"
     >
       <html lang="en">
-        <body className={outfit.variable}>
+        <body className={sora.variable}>
           {children}
           <CookieConsent />
           <Analytics />
