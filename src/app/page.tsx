@@ -140,6 +140,44 @@ export default function Home() {
 
         </section>
 
+        {/* Showcase Section */}
+        <section className={styles.showcase}>
+          <motion.div
+            className={styles.showcaseContent}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className={styles.showcaseHeader}>
+              <span className={styles.showcaseBadge}>✨ Real Results</span>
+              <h2>See What You Can Create</h2>
+              <p>Store-ready screenshots in under a minute</p>
+            </div>
+
+            <div className={styles.showcaseImageWrapper}>
+              <img 
+                src="/uygulamalarT.png" 
+                alt="App Store screenshots created with Shotsy for AppFigures" 
+                className={styles.showcaseImage}
+              />
+              <div className={styles.showcaseOverlay}></div>
+            </div>
+
+            <div className={styles.showcaseClient}>
+              <img 
+                src="/appfigureslogo.png" 
+                alt="AppFigures logo" 
+                className={styles.clientLogo}
+              />
+              <div className={styles.clientInfo}>
+                <span className={styles.clientName}>AppFigures</span>
+                <span className={styles.clientDesc}>App Analytics Platform</span>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
         {/* Features Section */}
         <section className={styles.features} id="features">
           <div className={styles.sectionHeader}>

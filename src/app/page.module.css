@@ -339,6 +339,152 @@
 }
 
 
+/* Showcase Section */
+.showcase {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
+}
+
+.showcaseContent {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.showcaseHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.showcaseBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  margin-bottom: 1.25rem;
+}
+
+.showcaseHeader h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.showcaseHeader p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.showcaseImageWrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 25px 80px -15px rgba(0, 0, 0, 0.5),
+    0 0 60px -10px rgba(251, 191, 36, 0.15);
+}
+
+.showcaseImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.showcaseOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 70%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+.showcaseClient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.25rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clientLogo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.clientName {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.clientDesc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .showcase {
+    padding: 4rem 1rem;
+  }
+  
+  .showcaseHeader h2 {
+    font-size: 1.75rem;
+  }
+  
+  .showcaseImageWrapper {
+    border-radius: 12px;
+  }
+  
+  .showcaseImage {
+    border-radius: 12px;
+  }
+  
+  .showcaseClient {
+    padding: 1rem 1.5rem;
+  }
+  
+  .clientLogo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
 /* Features Section */
 .features {
   padding: 8rem 1.5rem;
